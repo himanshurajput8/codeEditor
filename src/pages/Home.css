@@ -1,0 +1,92 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.homepage {
+  background-color: #1f2630;
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.logo-icon {
+  color: #f6336b;
+  font-size: 24px;
+  margin-right: 4px;
+}
+
+.nav a {
+  color: #ccc;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 14px;
+}
+
+.nav a:hover {
+  color: #ffffff;
+}
+
+.main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.title {
+  font-size: 38px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.highlight {
+  color: #ffffff;
+}
+
+.subtitle {
+  color: #ccc;
+  font-size: 18px;
+  margin-top: 20px;
+  max-width: 600px;
+}
+
+.share-button {
+  margin-top: 40px;
+  background-color: #f6336b;
+  color: white;
+  border: none;
+  font-size: 18px;
+  padding: 14px 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.share-button:hover {
+  background-color: #d82d5f;
+}
+
+.share-code {
+  color: #aaa;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
