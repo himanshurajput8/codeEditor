@@ -1,6 +1,6 @@
 import React from "react";
 import HomePage from "../pages/Home";
-import { EditorComp } from "../pages/editorPage/editor";
+import { EditorComp } from "../pages/Editor";
 import { Route, Routes } from "react-router-dom";
 
 export const MainLayout = () => {
