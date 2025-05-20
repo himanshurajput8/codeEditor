@@ -1,23 +1,16 @@
 import React from "react";
-import { useState} from "react";
 import HomePage from "../pages/Home";
-import CompaniesSection from "../pages/CompaniesSection";
 import { EditorComp } from "../pages/editorPage/editor";
-
+import { Route, Routes } from "react-router-dom";
 
 export const MainLayout = () => {
-    const [showEditor, setShowEditor] = useState(false);
 
     return (
         <>
-            {!showEditor ? (
-                <>
-                    <HomePage onShareClick={() => setShowEditor(true)} />
-                    <CompaniesSection />
-                </>
-            ) : (
-                <EditorComp />
-            )}
+        <Routes>
+            <Route path="/" element={<HomePage/>}/>
+            <Route path='/room/:id' element={<EditorComp/>}/>
+        </Routes>
         </>
     )
 }
