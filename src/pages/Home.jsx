@@ -1,21 +1,18 @@
-import React from "react";
 import "./Home.css";
+import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
-const HomePage = ({ onShareClick }) => {
+const HomePage = () => {
+    const navigate = useNavigate();
+    const onShareClick = () => {
+        const id = uuidv4();
+        console.log(id);
+        navigate(`room/${id}`);
+    }
+
     return (
         <div className="homepage">
             {/* Header */}
-            <header className="header">
-                <div className="logo">
-                    <span className="logo-icon">x</span>codeshare
-                </div>
-                <nav className="nav">
-                    <a href="#">Pricing</a>
-                    <a href="#">Sign Up</a>
-                    <a href="#">Log In</a>
-                </nav>
-            </header>
-
             {/* Main content */}
             <main className="main">
                 <h1 className="title">
@@ -27,7 +24,6 @@ const HomePage = ({ onShareClick }) => {
                 <button className="share-button"  onClick={onShareClick}>Share Code Now</button>
                 <p className="share-code">Share code for free.</p>
             </main>
-            
         </div>
     );
 };

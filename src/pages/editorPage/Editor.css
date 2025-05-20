@@ -1,0 +1,10 @@
+.aside-bar{
+    width: 5vw;
+}
+.editor-main-div{
+    display: flex;
+}
+
+.aside-bar btn{
+    background-color: transparent;
+}
