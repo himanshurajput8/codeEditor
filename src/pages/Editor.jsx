@@ -13,7 +13,7 @@ export const EditorComp = () => {
     useEffect(() => {
         // Connect to backend
         // socketRef.current = io('http://localhost:5001'); 
-        socketRef.current = io('https://your-backend-domain.onrender.com:10000', {
+        socketRef.current = io('https://your-backend-domain.onrender.com', {
             withCredentials: true,
             transports: ['websocket'],
         });
