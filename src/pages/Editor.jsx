@@ -12,7 +12,9 @@ export const EditorComp = () => {
 
        useEffect(() => {
         // Connect to backend
-        socketRef.current = io('http://localhost:5001'); // 
+        // socketRef.current = io('http://localhost:5001'); 
+        socketRef.current = io('https://your-backend-name.onrender.com');
+
 
         socketRef.current.on('connect', () => {
             console.log('Connected to socket server');
@@ -43,13 +45,8 @@ export const EditorComp = () => {
     return (
         <div  className='editor-main-div'>
             <Editor className='editor'
-                height="90vh"
-                width="95vw"
-                defaultLanguage="javascript"
-                defaultValue="// Write or paste code here..."
-                theme="vs-dark"
-                value={code}
-                onChange={handleEditorChange}
+                height="90vh" width="95vw" defaultLanguage="javascript" defaultValue="// Write or paste code here..." theme="vs-dark"
+                value={code} onChange={handleEditorChange}
                 options={{
                     fontSize: 16,
                     wordWrap: 'on',
