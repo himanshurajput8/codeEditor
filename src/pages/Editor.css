@@ -39,3 +39,11 @@
     background-color: #e0e0e0;
 }
 
+/* Editor.css */
+
+.remote-cursor {
+    border-left: 2px solid red;
+    height: 100%;
+}
+
+
