@@ -49,7 +49,7 @@ export const EditorComp = () => {
     return (
         <div className='editor-main-div'>
             <Editor className='editor'
-                height="90vh" width="95vw" defaultLanguage="javascript" defaultValue="// Write or paste code here..." theme="vs-dark"
+                height="90vh" width="95vw" defaultLanguage="javascript" defaultValue="// Write or paste code here.." theme="vs-dark"
                 value={code} onChange={handleEditorChange}
                 options={{
                     fontSize: 16,
