@@ -3,6 +3,7 @@ import './App.css'
 import { MainLayout } from './layouts/MainLayouts'
 import { Header } from './layouts/Header'
 import CompaniesSection from './pages/CompaniesSection'
+import Footer from './pages/Footer/Footer'
 
 function App() {
 
@@ -10,7 +11,8 @@ function App() {
       <BrowserRouter>
         <Header/>
         <MainLayout/>
-        <CompaniesSection/>
+        {/* <CompaniesSection/> */}
+        <Footer/>
       </BrowserRouter>
   )
 }
