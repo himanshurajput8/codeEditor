@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { io } from 'socket.io-client';
 import Editor from '@monaco-editor/react'
 import { useParams } from 'react-router-dom';
-import './Editor.css'
 import AsideBar from '../layouts/AsideBar'
 
 export const EditorComp = () => {
@@ -40,7 +39,6 @@ export const EditorComp = () => {
         // Receive remote cursor position
         socketRef.current.on('cursor-position-update', ({ lineNumber, column, senderId }) => {
             if (senderId === socketRef.current.id) return; // Ignore self
-
             setRemoteCursorPos({ lineNumber, column });
             console.log('Remote cursor at line:', lineNumber, 'column:', column);
         });
