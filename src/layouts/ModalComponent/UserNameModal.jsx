@@ -10,7 +10,7 @@ const UserNameModal = () => {
   const handleUserNameChange = (e) => {
     const typedValue = e.target.value;
     setUserName(typedValue);
-    localStorage.setItem('user_name', typedValue);
+    sessionStorage.setItem('user_name', typedValue);
   };
 
   const handleSubmit = (e) => {

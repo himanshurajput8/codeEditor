@@ -8,7 +8,7 @@ const UserNameContextProvider = ({ children }) => {
 
   
   useEffect(() => {
-    const storedName = localStorage.getItem('user_name');
+    const storedName = sessionStorage.getItem('user_name');
     if (storedName) {
       setUserName(storedName);
     } else {

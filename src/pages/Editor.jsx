@@ -1,8 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { io } from 'socket.io-client';
 import Editor from '@monaco-editor/react'
 import { useParams } from 'react-router-dom';
 import AsideBar from '../layouts/AsideBar'
+import { FullScreenContext } from '../ContextAPI/ToggleFullScreenContext';
+import { ThemeContext } from '../ContextAPI/ThemeContext';
 
 export const EditorComp = () => {
 
@@ -17,6 +19,19 @@ export const EditorComp = () => {
     const editorRef = useRef(null);
 
     const [users, setUsers] = useState([]);
+
+    const containerRef = useRef(null);   // Wrap editor in this container for fullscreen
+    
+    const {isFullScreen} = useContext(FullScreenContext);
+
+    const {theme, setTheme, themeCoosed, setThemeCossed} = useContext(ThemeContext);
+
+
+    useEffect(() => {
+        if (editorRef.current) {
+            editorRef.current.layout();
+        }
+    }, [isFullScreen]);
 
     useEffect(() => {
         // Connect to backend
@@ -131,8 +146,21 @@ export const EditorComp = () => {
 
     return (
         <div className='editor-main-div'>
+            <div
+               ref={containerRef}
+                style={{
+                    height: isFullScreen ? '100vh' : '92vh',
+                    width: isFullScreen ? '100vw' : '100vw',
+                    border: '1px solid gray',
+                }} 
+            >
+            
             <Editor className='editor'
-                height="92vh" width="100vw" defaultLanguage="javascript" defaultValue="// Write or paste code here..." theme="vs-dark"
+                height={isFullScreen ? '100vh' : '92vh'} 
+                width="100vw" 
+                defaultLanguage="javascript" 
+                defaultValue="// Write or paste code here..."
+                theme={themeCoosed}
                 value={code} 
                 onChange={handleEditorChange}
                 onMount={handleEditorMount}
@@ -147,6 +175,7 @@ export const EditorComp = () => {
                     suggestOnTriggerCharacters: true,
                 }}
             />
+            </div>
             <AsideBar />
         </div>
     );
