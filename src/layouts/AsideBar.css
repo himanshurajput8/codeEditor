@@ -1,7 +1,7 @@
 .aside-bar{
     position: absolute;
     bottom: 5vh;
-    width: 10vw;
+    min-width: 10vw;
     left: 45vw;
     border: solid;
     background-color: white;
@@ -13,4 +13,14 @@
     border: none;
     margin-left: 12px;
     cursor: pointer;
+}
+
+.setting_div_right{
+    position: absolute;
+    top: 8vh;
+    right: 0;
+    background-color: white;
+    height: 100vh;
+    width: 22vw;
+    z-index: 11;
 }
