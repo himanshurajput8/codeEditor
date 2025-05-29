@@ -40,7 +40,7 @@ const UserNameModal = () => {
           <button type="button" onClick={() => setUserName('')}>Clear</button>
           <button type="submit">Save</button>
         </div>
-        <button type="button" className="closeBtn" onClick={() => setShowModal(false)}>x</button>
+        <button type="button" onClick={() => setShowModal(false)} className="closeBtn">X</button>
       </form>
     </div>
   );

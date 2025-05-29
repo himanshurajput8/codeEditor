@@ -7,8 +7,7 @@
   padding: 20px 40px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   border-bottom: 1px solid rgb(201, 201, 201);
-  height: 5vh;
-  
+  height: 3vh;
 }
 
 .logo {
@@ -45,3 +44,46 @@
       transform: rotate(360deg);
     }
 }
+
+.dropdown {
+  position: absolute;
+  right: 10px;
+  top: 60px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 10px;
+  border-radius: 8px;
+  z-index: 100;
+}
+
+
+.header-userName-dropDown {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  /* position: relative; */
+}
+
+.header-userName-dropDown button{
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+}
+.header-userName-dropDown button svg{
+  padding-top: 5px;
+}
+.dropdown {
+  position: absolute;
+  top: 8.8vh;
+  right: 0px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 10px;
+  width: 250px;
+  height: 200px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+}
+
