@@ -13,6 +13,6 @@
     background-color: rgba(255, 0, 0, 0.3);
 }
 .remote-selection {
-  background-color: rgba(255, 0, 0, 0.3); /* Light red highlight */
+  background-color: rgba(255, 0, 0, 0.3); 
   border-radius: 2px;
 }
