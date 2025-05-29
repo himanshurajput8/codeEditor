@@ -1,0 +1,12 @@
+.remote-cursor {
+  position: absolute;
+  border-left: 2px solid red; /* Make it visible */
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.remote-selection {
+  background-color: rgba(255, 0, 0, 0.3); /* Light red highlight */
+  border-radius: 2px;
+}
