@@ -19,7 +19,7 @@ const HomePage = () => {
         Collaborate with your team to write, edit, and debug code — all in one place.
       </p>
       <button className="cssbuttons-io-button "
-      onClick={onShareClick}
+      onClick={onShareClick} 
       >
         Get started
         <div className="icon">

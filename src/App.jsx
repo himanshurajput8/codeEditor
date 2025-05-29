@@ -6,6 +6,7 @@ import CompaniesSection from './pages/CompaniesSection'
 import Footer from './pages/Footer/Footer'
 import UserNameModal from './layouts/ModalComponent/UserNameModal'
 
+
 function App() {
 
   return (
@@ -15,7 +16,6 @@ function App() {
         <MainLayout/>
 
         {/* <CompaniesSection/> */}
-        <Footer/>
       </BrowserRouter>
   )
 }

@@ -9,7 +9,7 @@ export const EditorComp = () => {
     const { id: roomId } = useParams();
     const [code, setCode] = useState("// Write or paste code here...");
     const [socketId, setSocketId] = useState(null);
-    
+
     const [remoteCursorPos, setRemoteCursorPos] = useState(null);
     const [remoteSelection, setRemoteSelection] = useState(null);
 
@@ -19,7 +19,7 @@ export const EditorComp = () => {
 
     useEffect(() => {
         // Connect to backend
-        socketRef.current = io('http://localhost:5001'); 
+        socketRef.current = io('http://localhost:5001');
         // socketRef.current = io('https://codeeditorbackend-pp93.onrender.com', {
         //     withCredentials: true,
         //     transports: ['websocket'],
@@ -43,7 +43,7 @@ export const EditorComp = () => {
             console.log('Remote cursor at line:', lineNumber, 'column:', column);
         });
 
-         socketRef.current.on('selection-update', ({ senderId, selection }) => {
+        socketRef.current.on('selection-update', ({ senderId, selection }) => {
             if (senderId === socketRef.current.id) return;
             setRemoteSelection(selection);
         });
@@ -55,57 +55,57 @@ export const EditorComp = () => {
     }, [roomId]);
 
     useEffect(() => {
-    if (!editorRef.current || !remoteCursorPos) return;
+        if (!editorRef.current || !remoteCursorPos) return;
 
-    const editor = editorRef.current;
+        const editor = editorRef.current;
 
-    // Decoration for remote cursor
-    const decoration = {
-        range: new window.monaco.Range(
-            remoteCursorPos.lineNumber,
-            remoteCursorPos.column,
-            remoteCursorPos.lineNumber,
-            remoteCursorPos.column
-        ),
-        options: {
-            className: 'remote-cursor',
-            stickiness: window.monaco.editor.TrackedRangeStickiness.NeverGrowsWhenTypingAtEdges,
-        },
-    };
+        // Decoration for remote cursor
+        const decoration = {
+            range: new window.monaco.Range(
+                remoteCursorPos.lineNumber,
+                remoteCursorPos.column,
+                remoteCursorPos.lineNumber,
+                remoteCursorPos.column
+            ),
+            options: {
+                className: 'remote-cursor',
+                stickiness: window.monaco.editor.TrackedRangeStickiness.NeverGrowsWhenTypingAtEdges,
+            },
+        };
 
-    // Apply the decoration
-    const decorations = editor.deltaDecorations([], [decoration]);
+        // Apply the decoration
+        const decorations = editor.deltaDecorations([], [decoration]);
 
-    // Cleanup on position change
-    return () => {
-        editor.deltaDecorations(decorations, []);
-    };
+        // Cleanup on position change
+        return () => {
+            editor.deltaDecorations(decorations, []);
+        };
     }, [remoteCursorPos]);
 
 
     useEffect(() => {
-    if (!editorRef.current || !remoteSelection) return;
+        if (!editorRef.current || !remoteSelection) return;
 
-    const editor = editorRef.current;
+        const editor = editorRef.current;
 
-    const decoration = {
-        range: new window.monaco.Range(
-            remoteSelection.startLineNumber,
-            remoteSelection.startColumn,
-            remoteSelection.endLineNumber,
-            remoteSelection.endColumn
-        ),
-        options: {
-            className: 'remote-selection',
-            isWholeLine: false,
-        },
-    };
+        const decoration = {
+            range: new window.monaco.Range(
+                remoteSelection.startLineNumber,
+                remoteSelection.startColumn,
+                remoteSelection.endLineNumber,
+                remoteSelection.endColumn
+            ),
+            options: {
+                className: 'remote-selection',
+                isWholeLine: false,
+            },
+        };
 
-    const decorations = editor.deltaDecorations([], [decoration]);
+        const decorations = editor.deltaDecorations([], [decoration]);
 
-    return () => {
-        editor.deltaDecorations(decorations, []);
-    };
+        return () => {
+            editor.deltaDecorations(decorations, []);
+        };
     }, [remoteSelection]);
 
 
@@ -120,23 +120,23 @@ export const EditorComp = () => {
     const handleEditorMount = (editor) => {
         editorRef.current = editor;
         editor.onDidChangeCursorPosition((e) => {
-        const position = e.position;
-        socketRef.current.emit('cursor-position-change', {
-            roomId,
-            lineNumber: position.lineNumber,
-            column: position.column,
-        });
+            const position = e.position;
+            socketRef.current.emit('cursor-position-change', {
+                roomId,
+                lineNumber: position.lineNumber,
+                column: position.column,
+            });
         });
 
         editor.onDidChangeCursorSelection((e) => {
-        const selection = e.selection;
-        socketRef.current.emit('selection-change', {
-            roomId,
-            selection: {
-                startLineNumber: selection.startLineNumber,
-                startColumn: selection.startColumn,
-                endLineNumber: selection.endLineNumber,
-                endColumn: selection.endColumn,
+            const selection = e.selection;
+            socketRef.current.emit('selection-change', {
+                roomId,
+                selection: {
+                    startLineNumber: selection.startLineNumber,
+                    startColumn: selection.startColumn,
+                    endLineNumber: selection.endLineNumber,
+                    endColumn: selection.endColumn,
                 },
             });
         });
@@ -145,8 +145,8 @@ export const EditorComp = () => {
     return (
         <div className='editor-main-div'>
             <Editor className='editor'
-                height="90vh" width="95vw" defaultLanguage="javascript" defaultValue="// Write or paste code here..." theme="vs-dark"
-                value={code} 
+                height="89vh" width="100vw" defaultLanguage="javascript" defaultValue="// Write or paste code here..." theme="vs-dark"
+                value={code}
                 onChange={handleEditorChange}
                 onMount={handleEditorMount}
                 options={{
@@ -160,7 +160,7 @@ export const EditorComp = () => {
                     suggestOnTriggerCharacters: true,
                 }}
             />
-            <AsideBar/>
+            <AsideBar />
         </div>
     );
-};
+};  
