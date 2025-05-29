@@ -1,49 +1,5 @@
-/* Editor.css */
-
-.editor-main-div {
-    padding-top: 10px;
-    background-color: #1e1e1e;
-    display: flex;
+.editor-main-div{
     position: relative;
+    height: 89vh;
+    width: 100vw;
 }
-
-/* Monaco Editor will be styled by props, so nothing here */
-
-.aside-bar {
-    position: absolute;
-    right: 5px;
-    top: 2px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background-color: rgb(48, 53, 62);
-    height: 100vh;
-    width: 4.5vw;
-}
-
-.aside-bar button {
-    border: none;
-    padding: 8px;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.2s;
-    border-bottom: 1px solid #222222;
-    background-color: transparent;
-}
-
-.aside-bar button svg{
-    fill: #acaeb2;
-}
-
-.aside-bar button:hover {
-    background-color: #e0e0e0;
-}
-
-/* Editor.css */
-
-.remote-cursor {
-    border-left: 2px solid red;
-    height: 100%;
-}
-
-

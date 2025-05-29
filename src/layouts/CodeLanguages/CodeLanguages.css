@@ -1,0 +1,50 @@
+
+.code-languages-container {
+  background-color: #ffffff;
+  color: #000000;
+  font-family: sans-serif;
+  padding: 40px 80px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-around;
+}
+
+.description {
+  max-width: 400px;
+}
+
+.description h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.description p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.languages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
+  gap: 0px 120px;
+  margin-top: 20px;
+}
+
+.language-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.language-icon {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.language-name {
+  font-size: 1rem;
+}
+
+.language-item img{
+  height: 3rem;
+}
