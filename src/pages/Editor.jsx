@@ -107,7 +107,7 @@ export const EditorComp = () => {
 
         return () => {
             editor.deltaDecorations(decorations, []);
-        };
+        };  
     }, [remoteSelection]);
 
 
