@@ -2,9 +2,10 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { io } from 'socket.io-client';
 import Editor from '@monaco-editor/react'
 import { useParams } from 'react-router-dom';
-import AsideBar from '../layouts/AsideBar'
-import { FullScreenContext } from '../ContextAPI/ToggleFullScreenContext';
-import { ThemeContext } from '../ContextAPI/ThemeContext';
+import AsideBar from '../../layouts/AsideBar/AsideBar';
+import { FullScreenContext } from '../../ContextAPI/ToggleFullScreenContext';
+import { ThemeContext } from '../../ContextAPI/ThemeContext';
+import { LanguageContext } from '../../ContextAPI/LanguageContext';
 
 export const EditorComp = () => {
 
@@ -22,16 +23,44 @@ export const EditorComp = () => {
 
     const containerRef = useRef(null);   // Wrap editor in this container for fullscreen
     
-    const {isFullScreen} = useContext(FullScreenContext);
+    const {isFullScreen, fontSize, setFontSize, miniMap, toggleMiniMap, isSettingOpen, setSettingToOpen} = useContext(FullScreenContext);
 
     const {theme, setTheme, themeCoosed, setThemeCossed} = useContext(ThemeContext);
 
+    const {totalLanguage, languageChoosed , setLanguageChoosed} = useContext(LanguageContext);
 
     useEffect(() => {
         if (editorRef.current) {
             editorRef.current.layout();
         }
     }, [isFullScreen]);
+
+    useEffect(() => {
+        if (editorRef.current && containerRef.current) {
+            const { width, height } = containerRef.current.getBoundingClientRect();
+            editorRef.current.layout({ width, height });
+        }
+    }, [isFullScreen, isSettingOpen]);
+
+
+    useEffect(() => {
+    if (!containerRef.current || !editorRef.current) return;
+
+    const observer = new ResizeObserver(() => {
+        const { width, height } = containerRef.current.getBoundingClientRect();
+        editorRef.current.layout({ width, height });
+    });
+
+    observer.observe(containerRef.current);
+
+    return () => observer.disconnect();
+}, []);
+
+
+
+    useEffect(() => {
+        setCode(languageChoosed.defaultValue);
+    }, [languageChoosed]);
 
     useEffect(() => {
         // Connect to backend
@@ -145,36 +174,41 @@ export const EditorComp = () => {
     };
 
     return (
-        <div className='editor-main-div'>
+        <div className='editor-main-div'
+            style={{ width: '100%', display: 'flex' }}
+        >
             <div
-               ref={containerRef}
+                ref={containerRef}
                 style={{
                     height: isFullScreen ? '100vh' : '92vh',
-                    width: isFullScreen ? '100vw' : '100vw',
+                    width: isSettingOpen ? '82vw' : '100%',
+                    transition: 'width 0.5s ease', 
                     border: '1px solid gray',
-                }} 
+                    overflow: 'hidden',
+                }}
             >
-            
-            <Editor className='editor'
+
+                <Editor className='editor'
                 height={isFullScreen ? '100vh' : '92vh'} 
-                width="100vw" 
-                defaultLanguage="javascript" 
-                defaultValue="// Write or paste code here..."
+                width='100%'
+                line={30} 
+                language={languageChoosed.language} 
+                defaultValue={languageChoosed.defaultValue}
                 theme={themeCoosed}
                 value={code} 
                 onChange={handleEditorChange}
                 onMount={handleEditorMount}
                 options={{
-                    fontSize: 16,
+                    fontSize: fontSize,
                     wordWrap: 'on',
-                    minimap: { enabled: true },
+                    minimap: { enabled: miniMap },
                     suggest: { enabled: true }, // 👈 Disables IntelliSense
                     formatOnType: true,
                     scrollBeyondLastLine: false,
                     quickSuggestions: false, // 👈 Disables suggestions-as-you-type
                     suggestOnTriggerCharacters: true,
-                }}
-            />
+                    }}
+                />
             </div>
             <AsideBar />
         </div>

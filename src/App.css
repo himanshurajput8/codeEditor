@@ -79,3 +79,10 @@
   pointer-events: none;
   z-index: 1000;
 }
+
+
+.hover_pointer :hover{
+  cursor: pointer;
+  transform: scale(1.2);
+  transition: 0.3s ease-in-out;
+}

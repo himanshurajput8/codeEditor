@@ -1,0 +1,164 @@
+.aside-bar{
+    position: absolute;
+    bottom: 5vh;
+    min-width: 10vw;
+    left: 45vw;
+    border: solid;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+.aside-bar button {
+    background-color: transparent;
+    border: none;
+    margin-left: 12px;
+    cursor: pointer;
+}
+
+
+.setting_div_right{
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    position: absolute;
+    top: 8vh;
+    right: 0;
+    background-color: white;
+    height: 100vh;
+    width: 18vw;
+    z-index: 11;
+    transition: all 0.5s ease-in-out;
+    display: flex;
+    font-family: "WDXL Lubrifont TC", sans-serif;
+    letter-spacing: 1px;
+    align-items: center;
+    background-color: white;
+    flex-direction: column;
+}
+
+.setting_div_right h1{
+    text-decoration: underline;
+    font-size: 36px;
+}
+
+.setting_and_close_div{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding-left: 20px;
+    gap: 48px;
+}
+
+.setting_and_close_div button{
+    height: 30px;
+    width: 30px;
+    background-color: #DAE0E5;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+select {
+  appearance: none; 
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 10px 40px 10px 15px;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #333;
+  outline: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+  transition: border 0.3s ease;
+}
+
+select:hover {
+  border-color: #888;
+}
+
+select:focus {
+  border-color: #007BFF;
+  box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+
+.font-size-div, .mini_map_div{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+}
+
+.font-size-div div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+
+
+.font-size-div div p{
+    font-size: 20px;
+}
+
+.mini_map_div div{
+    display: flex;
+}
+
+.font-size-div p svg {
+    display: flex;
+}
+
+.close_setting_btn_svg{
+    width: 40px;
+    height: 40px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+.editor-main-div{
+    position: relative;
+    height: 89vh;
+    width: 100vw;
+}
+.aside-bar{
+    width: 5vw;
+}
+.editor-main-div{
+    display: flex;
+    padding-Top:'10px';
+    background-Color:'#1E1E1E'
+}
+
+.aside-bar btn{
+    background-color: transparent;
+}
+
+.code-editor{
+    height:90vh;
+    width:95vw;
+} */
