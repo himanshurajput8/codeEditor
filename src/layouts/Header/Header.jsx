@@ -2,8 +2,8 @@
 import React, { useContext, useState } from 'react'
 import './header.css'
 import { useNavigate } from 'react-router-dom'
-import { userNameContext } from '../ContextAPI/UserNameContext';
-import UserNameModal from './ModalComponent/UserNameModal';
+import { userNameContext } from '../../ContextAPI/UserNameContext';
+import UserNameModal from '../ModalComponent/UserNameModal';
 
 export const Header = () => {
     const [showDropDown, setShowDropDown] = useState(false);
@@ -33,7 +33,7 @@ export const Header = () => {
                 onClick={handleGoToHome}
             >
                 <img src="/curly.png" alt="" />
-                CodeCollab
+                Code2gthr
             </div>
             {
                 userName ? (
@@ -45,6 +45,8 @@ export const Header = () => {
                      {showDropDown && (
             <div className="dropdown">
               <p onClick={handleForModal}>Change User Name</p>
+              <p>Login</p>
+              <p>Sign Up</p>
             </div>
           )}
         </div>

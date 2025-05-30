@@ -2,15 +2,18 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import UserNameContextProvider from './ContextAPI/UserNameContext.jsx'
-import { FullScreenContext, FullScreenContextProvider } from './ContextAPI/ToggleFullScreenContext.jsx'
-import { ThemeContext, ThemeContextProvider } from './ContextAPI/ThemeContext.jsx'
+import {  FullScreenContextProvider } from './ContextAPI/ToggleFullScreenContext.jsx'
+import {  ThemeContextProvider } from './ContextAPI/ThemeContext.jsx'
+import { LanguageContextProvider } from './ContextAPI/LanguageContext.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <UserNameContextProvider>
       <FullScreenContextProvider>
         <ThemeContextProvider>
-        <App />
+          <LanguageContextProvider>
+            <App />
+          </LanguageContextProvider>
         </ThemeContextProvider>
       </FullScreenContextProvider>
     </UserNameContextProvider>

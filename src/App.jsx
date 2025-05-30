@@ -1,9 +1,7 @@
 import {BrowserRouter} from 'react-router-dom'
 import './App.css'
 import { MainLayout } from './layouts/MainLayouts'
-import { Header } from './layouts/Header'
-import CompaniesSection from './pages/CompaniesSection'
-import Footer from './pages/Footer/Footer'
+import { Header } from './layouts/Header/Header'
 import UserNameModal from './layouts/ModalComponent/UserNameModal'
 
 
@@ -14,9 +12,6 @@ function App() {
         <Header/>
         <UserNameModal/>
         <MainLayout/>
-
-        {/* <CompaniesSection/> */}
-        
       </BrowserRouter>
   )
 }
