@@ -3,20 +3,16 @@
     height: 89vh;
     width: 100vw;
 }
-.aside-bar{
-    width: 5vw;
-}
-.editor-main-div{
-    display: flex;
-    padding-Top:'10px';
-    background-Color:'#1E1E1E'
+.remote-cursor {
+    position: absolute;
+    background-color: red;
+    width: 2px;
 }
 
-.aside-bar btn{
-    background-color: transparent;
+.remote-selection {
+    background-color: rgba(255, 0, 0, 0.3);
 }
-
-.code-editor{
-    height:90vh;
-    width:95vw;
+.remote-selection {
+  background-color: rgba(255, 0, 0, 0.3); 
+  border-radius: 2px;
 }
