@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { io } from 'socket.io-client';
 import Editor from '@monaco-editor/react'
 import { useParams } from 'react-router-dom';
-import AsideBar from '../../layouts/AsideBar/AsideBar';
+import AsideBar from '../../layouts/AsideBAr/AsideBar'
 import { FullScreenContext } from '../../ContextAPI/ToggleFullScreenContext';
 import { ThemeContext } from '../../ContextAPI/ThemeContext';
 import { LanguageContext } from '../../ContextAPI/LanguageContext';
