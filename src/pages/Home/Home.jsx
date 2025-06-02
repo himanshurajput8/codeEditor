@@ -11,12 +11,13 @@ const HomePage = () => {
   };
 
   return (
-    <div className="home-container">
-      <h1 className="home-heading">
-        Edit Code Together, in Real-Time
+    <div className="hero-container">
+      <h1 className="hero-title">
+        Share code with developers <span>⚡</span>
       </h1>
-      <p className="home-description">
-        Collaborate with your team to write, edit, and debug code — all in one place.
+      <p className="hero-subtext">
+        Codefile is a collaborative online code editor for technical interviews,
+        pair programming, teaching... you name it.
       </p>
       <button className="cssbuttons-io-button "
       onClick={onShareClick} 
@@ -37,8 +38,10 @@ const HomePage = () => {
           </svg>
         </div>
       </button>
-
-      <div className="editor-card">
+    <p className="hero-footer">
+        No sign up. Free. Forever <span className="heart">❤️</span>
+      </p>
+      {/* <div className="editor-card">
         <div className="editor-content">
           <div className="editor-header">
             <div className="editor-title">
@@ -64,7 +67,7 @@ const HomePage = () => {
             </pre>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

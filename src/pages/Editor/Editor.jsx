@@ -64,11 +64,11 @@ export const EditorComp = () => {
 
     useEffect(() => {
         // Connect to backend
-        socketRef.current = io('http://localhost:5001');
-        // socketRef.current = io('https://codeeditorbackend-pp93.onrender.com', {
-        //     withCredentials: true,
-        //     transports: ['websocket'],
-        // });
+        // socketRef.current = io('http://localhost:5001');
+        socketRef.current = io('https://codeeditorbackend-pp93.onrender.com', {
+            withCredentials: true,
+            transports: ['websocket'],
+        });
 
         socketRef.current.on('connect', () => {
             console.log('Connected to socket server');
