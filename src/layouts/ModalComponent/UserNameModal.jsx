@@ -19,7 +19,8 @@ const UserNameModal = () => {
       setShowModal(false);
     }
   };
-
+  console.log('Rendered UserNameModal');
+  
   return (
     <div className="modal-overlay">
       <form onSubmit={handleSubmit} className="modal-form">
