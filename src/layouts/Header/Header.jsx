@@ -7,7 +7,6 @@ import UserNameModal from '../ModalComponent/UserNameModal';
 
 export const Header = () => {
     const [showDropDown, setShowDropDown] = useState(false);
-    // const [showModal, setShowModal] = useState(false);
     const { showModal, setShowModal } = useContext(userNameContext);
 
     const navigate = useNavigate();
