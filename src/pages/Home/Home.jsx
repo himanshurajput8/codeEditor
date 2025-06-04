@@ -11,8 +11,8 @@ const HomePage = () => {
   };
 
   return (
-    <div className="hero-container">
-      <h1 className="hero-title">
+    <div className="hero-container" id='headerId-Div'>
+      <h1 className="hero-title" >
         Share code with developers <span>⚡</span>
       </h1>
       <p className="hero-subtext">
