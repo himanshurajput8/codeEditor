@@ -4,7 +4,6 @@ import "./SignUp.css";
 const NoSignupUI = () => {
   return (
     <>
-   <h1 className="feature-heading">Features</h1>
     <div className="container">
 
       <div className="content">

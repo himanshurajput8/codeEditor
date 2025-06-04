@@ -10,6 +10,7 @@ function App() {
   return (
       <BrowserRouter>
         <Header/>
+        <div style={{height: "10vh"}}/>
         <UserNameModal/>
         <MainLayout/>
       </BrowserRouter>

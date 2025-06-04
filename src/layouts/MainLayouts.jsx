@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import FeaturesSection from "./Features/FeaturesSection";
 import CodeLanguages from "../components/CodeLanguages/CodeLanguages";
 import Footer from "../pages/Footer/Footer";
+import InterviewComp from "../components/interviewPage/interview";
 import NoSignupUI from "../components/signUp/SignUp";
 import InviteUi from "../components/invite/Invite";
 import DropLandingPageComp from "../components/dropdownlandingPage/dropLandingPage";
@@ -19,6 +20,7 @@ export const MainLayout = () => {
                 element={<>
                     <HomePage/>
                     {/* <FeaturesSection/> */}
+                    <InterviewComp/>
                     <NoSignupUI/>
                     <InviteUi/>
                     <DropLandingPageComp/>

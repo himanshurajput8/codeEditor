@@ -17,6 +17,7 @@
 
 
 .setting_div_right{
+    margin-top: 13px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     position: absolute;
     top: 8vh;
@@ -32,11 +33,14 @@
     align-items: center;
     background-color: white;
     flex-direction: column;
+        line-height: 8vh;
+
 }
 
 .setting_div_right h1{
     text-decoration: underline;
     font-size: 36px;
+    margin-top: 10vh;
 }
 
 .setting_and_close_div{
@@ -97,6 +101,7 @@ select:focus {
     align-items: center;
     gap: 20px;
     justify-content: center;
+    line-height: 10vh;
 }
 
 .font-size-div div{

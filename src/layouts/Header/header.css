@@ -5,8 +5,11 @@
   padding: 20px 40px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   border-bottom: 1px solid rgb(201, 201, 201);
-  height: 3vh;
+  height: 10vh;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  position: fixed;
+  width: 100vw;
+  background-color: rgba(255, 255, 255, 0.771);
 }
 
 .logo {
@@ -32,7 +35,8 @@
 }
 
 .logo img{
-  height: 2rem;
+
+  height: 3.5rem;
   /* animation: rotate360 6s linear infinite; */
 }
 @keyframes rotate360 {
@@ -85,3 +89,33 @@
   cursor: pointer;
   font-weight: bold;
 
+}
+
+/* Center nav links */
+.header-nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.header-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  padding: 0;
+  margin: 0;
+}
+
+.header-nav li {
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.header-nav li:hover {
+  color: purple;
+}
+ul li a{
+  text-decoration: none;
+  color: black;
+}
