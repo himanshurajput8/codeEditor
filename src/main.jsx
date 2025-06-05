@@ -5,6 +5,7 @@ import UserNameContextProvider from './ContextAPI/UserNameContext.jsx'
 import {  FullScreenContextProvider } from './ContextAPI/ToggleFullScreenContext.jsx'
 import {  ThemeContextProvider } from './ContextAPI/ThemeContext.jsx'
 import { LanguageContextProvider } from './ContextAPI/LanguageContext.jsx'
+import { NavContextProvider } from './ContextAPI/NavBarContext.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -12,7 +13,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <FullScreenContextProvider>
         <ThemeContextProvider>
           <LanguageContextProvider>
-            <App />
+            <NavContextProvider>
+              <App />
+            </NavContextProvider>
           </LanguageContextProvider>
         </ThemeContextProvider>
       </FullScreenContextProvider>

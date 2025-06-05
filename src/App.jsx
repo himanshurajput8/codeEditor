@@ -4,17 +4,15 @@ import { MainLayout } from './layouts/MainLayouts'
 import { Header } from './layouts/Header/Header'
 import UserNameModal from './layouts/ModalComponent/UserNameModal'
 
-
 function App() {
 
   return (
       <BrowserRouter>
         <Header/>
-        <div style={{height: "10vh"}} id='home'/>
         <UserNameModal/>
         <MainLayout/>
       </BrowserRouter>
   )
 }
 
-export default App
+export default App;

@@ -1,14 +1,19 @@
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
+import { NavContext } from "../../ContextAPI/NavBarContext";
+import { useContext } from "react";
 
 const HomePage = () => {
+  const {setNav } = useContext(NavContext);
   const navigate = useNavigate();
   const onShareClick = () => {
+    setNav(false);
     const id = uuidv4();
     console.log(id);
     navigate(`room/${id}`);
   };
+
 
   return (
     <div className="hero-container" id='headerId-Div'>
@@ -41,33 +46,6 @@ const HomePage = () => {
     <p className="hero-footer">
         No sign up. Free. Forever <span className="heart">❤️</span>
       </p>
-      {/* <div className="editor-card">
-        <div className="editor-content">
-          <div className="editor-header">
-            <div className="editor-title">
-              <div className="language-badge">JS</div>
-              <span className="editor-name">Collaborative Editor</span>
-            </div>
-            <div className="avatars">
-              <img src='/boy.png' alt="User 1" className="avatar" />
-              <img src="/hacker.png" alt="User 2" className="avatar overlapping-avatar" />
-            </div>
-          </div>
-
-          <div className="code-block">
-            <pre>
-              <code>
-{`function HelloWorld() {
-  const message = 'Hello, world!';
-  return (
-    <h1>{message}</h1>
-  );
-}`}
-              </code>
-            </pre>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 };
