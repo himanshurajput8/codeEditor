@@ -93,7 +93,7 @@ export const Header = () => {
           )}
         </div>
       ) : (
-        <button className="guest-signin" onClick={() => navigate('/signin')}>
+        <button className="guest-signin">
           Sign In as Guest
         </button>
       )}
