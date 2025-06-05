@@ -3,6 +3,7 @@ import './header.css';
 import { useNavigate } from 'react-router-dom';
 import { userNameContext } from '../../ContextAPI/UserNameContext';
 import UserNameModal from '../ModalComponent/UserNameModal';
+import { NavContext } from '../../ContextAPI/NavBarContext';
 
 export const Header = () => {
   const [showDropDown, setShowDropDown] = useState(false);
@@ -10,8 +11,9 @@ export const Header = () => {
   const navigate = useNavigate();
   const [activeLink, setActiveLink] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
+  const { isnav, setNav} = useContext(NavContext);
 
-    const navItems = [
+  const navItems = [
     { id: "home", label: "Home" },
     { id: "features", label: "Features" },
     { id: "contact", label: "Contact Us" }
@@ -19,8 +21,11 @@ export const Header = () => {
 
   const dropdownRef = useRef(null);
 
-  const handleGoToHome = () => navigate('/');
-
+  const handleGoToHome = () => {
+    navigate('/');
+    setNav(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
   const toggleDropDown = () => setShowDropDown(prev => !prev);
 
   const openUserNameModal = () => {
@@ -41,64 +46,71 @@ export const Header = () => {
   }, []);
 
   useEffect(() => {
-  const handleScroll = () => {
-    setIsScrolled(window.scrollY > 0);
-  };
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
 
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, []);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header  className={`header ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="logo" onClick={handleGoToHome}>
-        <img src="/curly1.jpeg" alt="logo" />
-        Code2gthr
-      </div>
+    <>
 
-      <nav className="header-nav">
-        <ul>
-          {navItems.map((item) => (
-            <li
-              key={item.id}
-              className={activeLink === item.id ? "active" : ""}
-              onClick={() => setActiveLink(item.id)}
-            >
-              <a href={`#${item.id}`}>{item.label}</a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
-
-      {userName ? (
-        <div className="header-userName-dropDown" ref={dropdownRef}>
-          <p>{userName}</p>
-          <button
-            onClick={toggleDropDown}
-            aria-haspopup="true"
-            aria-expanded={showDropDown}
-            aria-label="User menu"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
-              <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
-            </svg>
-          </button>
-          {showDropDown && (
-            <div className="dropdown">
-              <p onClick={openUserNameModal}>Change User Name</p>
-              <p >Login</p>
-              <p >Sign Up</p>
-            </div>
-          )}
+      <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
+        <div className="logo" onClick={handleGoToHome}>
+          <img src="/curly1.jpeg" alt="logo" />
+          Code2gthr
         </div>
-      ) : (
-        <button className="guest-signin">
-          Sign In as Guest
-        </button>
-      )}
 
-      {showModal && <UserNameModal />}
-    </header>
+        {
+          isnav &&
+          <nav className="header-nav">
+            <ul>
+              {navItems.map((item) => (
+                <li
+                  key={item.id}
+                  className={activeLink === item.id ? "active" : ""}
+                  onClick={() => setActiveLink(item.id)}
+                >
+                  <a href={`#${item.id}`}>{item.label}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        }
+
+
+        {userName ? (
+          <div className="header-userName-dropDown" ref={dropdownRef}>
+            <p>{userName}</p>
+            <button
+              onClick={toggleDropDown}
+              aria-haspopup="true"
+              aria-expanded={showDropDown}
+              aria-label="User menu"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+                <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
+              </svg>
+            </button>
+            {showDropDown && (
+              <div className="dropdown">
+                <p onClick={openUserNameModal}>Change User Name</p>
+                <p >Login</p>
+                <p >Sign Up</p>
+              </div>
+            )}
+          </div>
+        ) : (
+          <button className="guest-signin">
+            Sign In as Guest
+          </button>
+        )}
+
+        {showModal && <UserNameModal />}
+      </header>
+        <div style={{height: "10vh"}} id='home'/>
+    </>
   );
 };
