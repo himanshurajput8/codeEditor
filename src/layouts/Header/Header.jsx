@@ -8,6 +8,14 @@ export const Header = () => {
   const [showDropDown, setShowDropDown] = useState(false);
   const { showModal, setShowModal, userName } = useContext(userNameContext);
   const navigate = useNavigate();
+  const [activeLink, setActiveLink] = useState("home");
+  const [isScrolled, setIsScrolled] = useState(false);
+
+    const navItems = [
+    { id: "home", label: "Home" },
+    { id: "features", label: "Features" },
+    { id: "contact", label: "Contact Us" }
+  ];
 
   const dropdownRef = useRef(null);
 
@@ -32,20 +40,35 @@ export const Header = () => {
     };
   }, []);
 
+  useEffect(() => {
+  const handleScroll = () => {
+    setIsScrolled(window.scrollY > 0);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+
   return (
-    <header className="header" >
+    <header  className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="logo" onClick={handleGoToHome}>
         <img src="/curly1.jpeg" alt="logo" />
         Code2gthr
       </div>
 
-      <div className="header-nav">
+      <nav className="header-nav">
         <ul>
-          <li><a href="#headerId-Div">Home</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#contact">Contact Us</a></li>
+          {navItems.map((item) => (
+            <li
+              key={item.id}
+              className={activeLink === item.id ? "active" : ""}
+              onClick={() => setActiveLink(item.id)}
+            >
+              <a href={`#${item.id}`}>{item.label}</a>
+            </li>
+          ))}
         </ul>
-      </div>
+      </nav>
 
 
       {userName ? (

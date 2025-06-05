@@ -10,7 +10,7 @@ function App() {
   return (
       <BrowserRouter>
         <Header/>
-        <div style={{height: "10vh"}} id='headerId-Div'/>
+        <div style={{height: "10vh"}} id='home'/>
         <UserNameModal/>
         <MainLayout/>
       </BrowserRouter>
