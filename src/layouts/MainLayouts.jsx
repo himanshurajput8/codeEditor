@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import HomePage from "../pages/Home/Home";
 import { EditorComp } from "../pages/Editor/Editor";
 import { Route, Routes } from "react-router-dom";
@@ -10,9 +10,11 @@ import NoSignupUI from "../components/signUp/SignUp";
 import InviteUi from "../components/invite/Invite";
 import DropLandingPageComp from "../components/dropdownlandingPage/dropLandingPage";
 import EdtiorComponent from "../components/editor/editorComp";
+import RrwebReplayModal from "../components/RRWEB/Rrweb";
+import { RrwebContext } from "../ContextAPI/RrwebContext";
 
 export const MainLayout = () => {
-
+    const {showReplayModal, setShowReplayModal} = useContext(RrwebContext);
     return (
         <>
         <Routes>
@@ -28,7 +30,16 @@ export const MainLayout = () => {
                     <CodeLanguages/>
                     <Footer/>
                 </>}/>
-            <Route path='/room/:id' element={<EditorComp/>}/>
+            <Route 
+                path='/room/:id' 
+                element={
+                    <>
+                        <EditorComp/>
+                        {showReplayModal && (
+                            <RrwebReplayModal onClose={() => setShowReplayModal(false)} />
+                        )}
+                    </>
+                }/>
         </Routes>
         </>
     )
