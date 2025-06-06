@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import './header.css';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { userNameContext } from '../../ContextAPI/UserNameContext';
 import UserNameModal from '../ModalComponent/UserNameModal';
 import { NavContext } from '../../ContextAPI/NavBarContext';
@@ -18,7 +18,20 @@ export const Header = () => {
   const { isnav, setNav } = useContext(NavContext);
   const { recording, setRecording, stopFnRef, replayerContainerRef } = useContext(RrwebContext);
   const [showReplayModal, setShowReplayModal] = useState(false);
+  const locationPath='';
+
+  const location = useLocation();
+  console.log('location', location.pathname);
   
+
+  useEffect(() => {
+    if (location.pathname.includes('/room')) {
+      setNav(false);
+    } else {
+      setNav(true);
+    }
+  }, [location.pathname, setNav]);
+
   const navItems = [
     { id: "home", label: "Home" },
     { id: "features", label: "Features" },
@@ -60,19 +73,19 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-const handleRecord = () => {
-  startRecording(stopFnRef);
-  setRecording(true);
-};
+  const handleRecord = () => {
+    startRecording(stopFnRef);
+    setRecording(true);
+  };
 
-const handleStop = () => {
-  stopRecording(stopFnRef);
-  setRecording(false);
-};
+  const handleStop = () => {
+    stopRecording(stopFnRef);
+    setRecording(false);
+  };
 
-const handleReplay = () => {
-  setShowReplayModal(true);
-};
+  const handleReplay = () => {
+    setShowReplayModal(true);
+  };
 
   return (
     <>
@@ -106,7 +119,7 @@ const handleReplay = () => {
           //   )}
           //   <button onClick={handleReplay}>Replay</button>
           // </div>
-          <RecordingNavIconsHeader/>
+          <RecordingNavIconsHeader />
         )}
 
         {userName ? (
@@ -140,7 +153,7 @@ const handleReplay = () => {
       </header>
 
       <div style={{ height: "10vh" }} id='home' />
-      
+
     </>
   );
 };

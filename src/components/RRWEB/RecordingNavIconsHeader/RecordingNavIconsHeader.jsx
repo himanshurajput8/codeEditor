@@ -2,13 +2,17 @@ import React, { useContext, useState } from 'react'
 import { NavContext } from '../../../ContextAPI/NavBarContext';
 import { RrwebContext } from '../../../ContextAPI/RrwebContext';
 import { startRecording, stopRecording } from '../rrwebFunctions';
+import { useLocation } from 'react-router-dom';
 
 export default function RecordingNavIconsHeader() {
     
     const { isnav, setNav } = useContext(NavContext);
     const { recording, setRecording, stopFnRef, replayerContainerRef } = useContext(RrwebContext);
     const {setShowReplayModal} = useContext(RrwebContext);
-      
+    const location = useLocation();
+
+    console.log(location);
+    
     const handleRecord = () => {
       startRecording(stopFnRef);
       setRecording(true);
