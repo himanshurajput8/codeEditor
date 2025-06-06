@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { userNameContext } from '../../ContextAPI/UserNameContext';
 import UserNameModal from '../ModalComponent/UserNameModal';
 import { NavContext } from '../../ContextAPI/NavBarContext';
+import { startRecording, stopRecording, replayRecording } from '../../components/RRWEB/rrwebFunctions';
+import { RrwebContext } from '../../ContextAPI/RrwebContext';
+import RrwebReplayModal from '../../components/RRWEB/Rrweb';
+import RecordingNavIconsHeader from '../../components/RRWEB/RecordingNavIconsHeader/RecordingNavIconsHeader';
 
 export const Header = () => {
   const [showDropDown, setShowDropDown] = useState(false);
@@ -11,8 +15,10 @@ export const Header = () => {
   const navigate = useNavigate();
   const [activeLink, setActiveLink] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
-  const { isnav, setNav} = useContext(NavContext);
-
+  const { isnav, setNav } = useContext(NavContext);
+  const { recording, setRecording, stopFnRef, replayerContainerRef } = useContext(RrwebContext);
+  const [showReplayModal, setShowReplayModal] = useState(false);
+  
   const navItems = [
     { id: "home", label: "Home" },
     { id: "features", label: "Features" },
@@ -54,6 +60,20 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+const handleRecord = () => {
+  startRecording(stopFnRef);
+  setRecording(true);
+};
+
+const handleStop = () => {
+  stopRecording(stopFnRef);
+  setRecording(false);
+};
+
+const handleReplay = () => {
+  setShowReplayModal(true);
+};
+
   return (
     <>
 
@@ -63,8 +83,7 @@ export const Header = () => {
           Code2gthr
         </div>
 
-        {
-          isnav &&
+        {isnav ? (
           <nav className="header-nav">
             <ul>
               {navItems.map((item) => (
@@ -78,8 +97,17 @@ export const Header = () => {
               ))}
             </ul>
           </nav>
-        }
-
+        ) : (
+          // <div>
+          //   {!recording ? (
+          //     <button onClick={handleRecord}>Start Recording</button>
+          //   ) : (
+          //     <button onClick={handleStop}>Stop Recording</button>
+          //   )}
+          //   <button onClick={handleReplay}>Replay</button>
+          // </div>
+          <RecordingNavIconsHeader/>
+        )}
 
         {userName ? (
           <div className="header-userName-dropDown" ref={dropdownRef}>
@@ -110,7 +138,9 @@ export const Header = () => {
 
         {showModal && <UserNameModal />}
       </header>
-        <div style={{height: "10vh"}} id='home'/>
+
+      <div style={{ height: "10vh" }} id='home' />
+      
     </>
   );
 };
