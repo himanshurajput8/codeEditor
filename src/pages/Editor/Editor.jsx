@@ -214,8 +214,7 @@ export const EditorComp = () => {
             <div
                 ref={containerRef}
                 style={{
-                    // height: isFullScreen ? '100vh' : '92vh',
-                    height:'50vh',
+                    height: isFullScreen ? '100vh' : '92vh',
                     width: isSettingOpen ? '82vw' : '100%',
                     transition: 'width 0.5s ease',
                     border: '1px solid gray',

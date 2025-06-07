@@ -1,13 +1,11 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import { useContext, useState, useEffect, useRef } from 'react';
 import './header.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { userNameContext } from '../../ContextAPI/UserNameContext';
 import UserNameModal from '../ModalComponent/UserNameModal';
 import { NavContext } from '../../ContextAPI/NavBarContext';
-import { startRecording, stopRecording, replayRecording } from '../../components/RRWEB/rrwebFunctions';
-import { RrwebContext } from '../../ContextAPI/RrwebContext';
-import RrwebReplayModal from '../../components/RRWEB/Rrweb';
 import RecordingNavIconsHeader from '../../components/RRWEB/RecordingNavIconsHeader/RecordingNavIconsHeader';
+import SignInAsGuestBtn from '../../components/SignInAsGuestbtn/SignInAsGuestBtn';
 
 export const Header = () => {
   const [showDropDown, setShowDropDown] = useState(false);
@@ -16,14 +14,8 @@ export const Header = () => {
   const [activeLink, setActiveLink] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
   const { isnav, setNav } = useContext(NavContext);
-  const { recording, setRecording, stopFnRef, replayerContainerRef } = useContext(RrwebContext);
-  const [showReplayModal, setShowReplayModal] = useState(false);
-  const locationPath='';
-
   const location = useLocation();
-  console.log('location', location.pathname);
   
-
   useEffect(() => {
     if (location.pathname.includes('/room')) {
       setNav(false);
@@ -73,29 +65,13 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleRecord = () => {
-    startRecording(stopFnRef);
-    setRecording(true);
-  };
-
-  const handleStop = () => {
-    stopRecording(stopFnRef);
-    setRecording(false);
-  };
-
-  const handleReplay = () => {
-    setShowReplayModal(true);
-  };
-
   return (
     <>
-
       <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
         <div className="logo" onClick={handleGoToHome}>
           <img src="/curly1.jpeg" alt="logo" />
           Code2gthr
         </div>
-
         {isnav ? (
           <nav className="header-nav">
             <ul>
@@ -111,14 +87,6 @@ export const Header = () => {
             </ul>
           </nav>
         ) : (
-          // <div>
-          //   {!recording ? (
-          //     <button onClick={handleRecord}>Start Recording</button>
-          //   ) : (
-          //     <button onClick={handleStop}>Stop Recording</button>
-          //   )}
-          //   <button onClick={handleReplay}>Replay</button>
-          // </div>
           <RecordingNavIconsHeader />
         )}
 
@@ -144,16 +112,11 @@ export const Header = () => {
             )}
           </div>
         ) : (
-          <button className="guest-signin">
-            Sign In as Guest
-          </button>
+          <SignInAsGuestBtn/>
         )}
-
         {showModal && <UserNameModal />}
       </header>
-
       <div style={{ height: "10vh" }} id='home' />
-
     </>
   );
 };
