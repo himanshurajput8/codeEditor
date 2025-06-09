@@ -3,15 +3,47 @@ import { AuthContext } from "../../ContextAPI/AuthUser";
 import LoginModal from "../LoginModal/LoginModal";
 
 export default function SignInAsGuestBtn() {
-  const { isAuthPage, setShowisAuthPage } = useContext(AuthContext);
+  const {
+    isAuthPage,
+    setShowisAuthPage,
+    isUserLogged,
+    AuthUserData,
+    isAuthLoading // 👈 added to wait until auth is resolved
+  } = useContext(AuthContext);
+
+  console.log("Auth status:", { isUserLogged, AuthUserData, isAuthLoading });
 
   const handleAuthPage = () => {
     setShowisAuthPage(true);
   };
 
-  return isAuthPage ? (
-    <LoginModal />
-  ) : (
+  // ⏳ Wait until auth is resolved before rendering anything
+  if (isAuthLoading) {
+    return null; // Or a loading spinner if desired
+  }
+
+  // 📍 Show login modal if auth page is triggered
+  if (isAuthPage) return <LoginModal />;
+
+  // ✅ Show avatar if logged in
+  if (isUserLogged && AuthUserData) {
+    return (
+      <img
+        src={AuthUserData.user_metadata?.avatar_url}
+        alt={AuthUserData.email}
+        className="user-avatar"
+        style={{
+          borderRadius: "50%",
+          width: "40px",
+          height: "40px",
+          objectFit: "cover"
+        }}
+      />
+    );
+  }
+
+  // 👤 Default: show guest login button
+  return (
     <button className="guest-signin" onClick={handleAuthPage}>
       Sign In as Guest
     </button>
