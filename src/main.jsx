@@ -7,6 +7,7 @@ import {  ThemeContextProvider } from './ContextAPI/ThemeContext.jsx'
 import { LanguageContextProvider } from './ContextAPI/LanguageContext.jsx'
 import { NavContextProvider } from './ContextAPI/NavBarContext.jsx'
 import { RrwebContext, RrwebContextProvider } from './ContextAPI/RrwebContext.jsx'
+import { AuthContextProvider } from './ContextAPI/AuthUser.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -16,7 +17,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <LanguageContextProvider>
             <NavContextProvider>
               <RrwebContextProvider>
-                <App />
+                <AuthContextProvider>
+                  <App />
+                </AuthContextProvider>
               </RrwebContextProvider>
             </NavContextProvider>
           </LanguageContextProvider>

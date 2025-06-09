@@ -1,76 +1,54 @@
-import React, { useContext, useState } from 'react'
-import { NavContext } from '../../../ContextAPI/NavBarContext';
+import { useEffect, useState, useContext } from 'react';
 import { RrwebContext } from '../../../ContextAPI/RrwebContext';
-import { startRecording, stopRecording } from '../rrwebFunctions';
-import { useLocation } from 'react-router-dom';
+import { startRecording, stopRecording, clearRecording } from '../rrwebFunctions';
 
 export default function RecordingNavIconsHeader() {
-    
-    const { isnav, setNav } = useContext(NavContext);
-    const { recording, setRecording, stopFnRef, replayerContainerRef } = useContext(RrwebContext);
-    const {setShowReplayModal} = useContext(RrwebContext);
-    const location = useLocation();
+  const { recording, setRecording, stopFnRef} = useContext(RrwebContext);
+  const { setShowReplayModal } = useContext(RrwebContext);
+  const [hasRecording, setHasRecording] = useState(false);
 
-    console.log(location);
-    
-    const handleRecord = () => {
-      startRecording(stopFnRef);
-      setRecording(true);
-    };
-    
-    const handleStop = () => {
-      stopRecording(stopFnRef);
-      setRecording(false);
-    };
-    
-    const handleReplay = () => {
-      setShowReplayModal(true);
-    };
-    
+  useEffect(() => {
+    const stored = localStorage.getItem('rrweb-recording');
+    setHasRecording(!!stored);
+  }, [recording]); // Re-check whenever recording state changes
+
+  const handleRecord = () => {
+    startRecording(stopFnRef);
+    setRecording(true);
+    setHasRecording(false); // clear replay state while recording new
+  };
+
+  const handleStop = () => {
+    stopRecording(stopFnRef);
+    setRecording(false);
+    setHasRecording(true); // allow replay button after stop
+  };
+
+  const handleReplay = () => {
+    setShowReplayModal(true);
+  };
+
+
   return (
     <div>
-        {!recording ? (
-              <button onClick={handleRecord}
-                style={{
-                    backgroundColor:'transparent',
-                    border:'none'
-                }}
-             >
-                <img src="/rec.png" alt="" 
-                    style={{
-                        height:'40px'
-                    }}
-                />
-              </button>
-            ) : (
-              <button onClick={handleStop}
-                style={{
-                    backgroundColor:'transparent',
-                    border:'none'
-                }}
-              >
-                <img src="/stop.png" alt="" 
-                    style={{
-                        height:'40px'
-                    }}
-                />
-              </button>
-            )}
-            {
-                recording &&
-                <button onClick={handleReplay}
-                    style={{
-                    backgroundColor:'transparent',
-                    border:'none'
-                }}
-                >
-                    <img src="/play.png" alt="" 
-                        style={{
-                        height:'30px'
-                    }}
-                    />
-                </button>
-            }
+      {!recording ? (
+        <button onClick={handleRecord} style={{ backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }}>
+          <img src="/rec.png" alt="Start Recording" style={{ height: '40px' }} />
+        </button>
+      ) : (
+        <button onClick={handleStop} style={{ backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }}>
+          <img src="/stop.png" alt="Stop Recording" style={{ height: '40px' }} />
+        </button>
+      )}
+
+      {hasRecording && (
+        <button onClick={handleReplay} style={{ backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }}>
+          <img src="/play.png" alt="Replay Recording" style={{ height: '30px' }} />
+        </button>
+      )}
+      <button onClick={clearRecording}>
+        Clear Recording
+      </button>
     </div>
-  )
+  );
 }

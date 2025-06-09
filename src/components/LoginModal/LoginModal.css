@@ -1,0 +1,77 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #0f0f11;
+  color: #fff;
+  padding: 32px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  border: 1px solid #333;
+}
+
+.modal-content h2 {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.modal-content p {
+  color: #aaa;
+  margin-bottom: 24px;
+}
+
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.oauth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border: 1px solid #444;
+  border-radius: 6px;
+  background-color: #1c1c1e;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.oauth-btn img {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.oauth-btn:hover {
+  background-color: #2c2c2e;
+}
+
+.cancel-btn {
+  margin-top: 24px;
+  font-size: 14px;
+  color: #888;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.cancel-btn:hover {
+  text-decoration: underline;
+}
