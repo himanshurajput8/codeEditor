@@ -3,17 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 import { NavContext } from "../../ContextAPI/NavBarContext";
 import { useContext } from "react";
+import { nanoid } from "nanoid";
 
 const HomePage = () => {
   const {setNav } = useContext(NavContext);
   const navigate = useNavigate();
   const onShareClick = () => {
     setNav(false);
-    const id = uuidv4();
+    const id = nanoid(12);
     console.log(id);
-    navigate(`room/${id}`);
+    navigate(`${id}`);
   };
-
 
   return (
     <div className="hero-container" id='headerId-Div'>

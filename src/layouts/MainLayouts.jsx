@@ -12,6 +12,7 @@ import DropLandingPageComp from "../components/dropdownlandingPage/dropLandingPa
 import EdtiorComponent from "../components/editor/editorComp";
 import RrwebReplayModal from "../components/RRWEB/Rrweb";
 import { RrwebContext } from "../ContextAPI/RrwebContext";
+import Sessions from "../pages/Sessions/Sessions";
 
 export const MainLayout = () => {
     const {showReplayModal, setShowReplayModal} = useContext(RrwebContext);
@@ -31,7 +32,7 @@ export const MainLayout = () => {
                     <Footer/>
                 </>}/>
             <Route 
-                path='/room/:id' 
+                path='/:id' 
                 element={
                     <>
                         <EditorComp/>
@@ -39,7 +40,15 @@ export const MainLayout = () => {
                             <RrwebReplayModal onClose={() => setShowReplayModal(false)} />
                         )}
                     </>
-                }/>
+                }
+            />
+            
+            <Route
+                path='/sessions'
+                element ={
+                    <Sessions/>
+                }
+            />
         </Routes>
         </>
     )
