@@ -36,7 +36,6 @@ export const EditorComp = () => {
         if (editorRef.current) editorRef.current.layout();
     }, [isFullScreen, isSettingOpen]);
 
-
     useEffect(() => {
         if (!containerRef.current || !editorRef.current) return;
         const observer = new ResizeObserver(() => {

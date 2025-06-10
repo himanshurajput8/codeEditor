@@ -6,7 +6,7 @@ import { log } from 'socket.io-client/dist/socket.io.js';
 
 export default function LoginModal() {
 
-    const { AuthUserData, setAuthUserData } = useContext(AuthContext);
+    const { AuthUserData, setAuthUserData ,setShowisAuthPage} = useContext(AuthContext);
 
     const handleGoogleAuthentication = async () => {
         try {
@@ -20,6 +20,19 @@ export default function LoginModal() {
         }
     };
 
+    const handleGithubAuthentication = async () => {
+        try {
+            const { data, error } = await supabase.auth.signInWithOAuth({
+                provider: 'github',
+            });
+            console.log("Github Auth Response:", data);
+            if (error) throw error;
+        } catch (err) {
+            console.error("Github Auth Error:", err.message);
+        }
+    };
+    
+
     useEffect(() => {
         const fetchUser = async () => {
             try {
@@ -27,7 +40,8 @@ export default function LoginModal() {
                 const { data, error } = await supabase.auth.getUser();
                 if (error) throw error;
                 if (data?.user) {
-                    setAuthUserData(data.user);   
+                    setAuthUserData(data.user);  
+                    console.log('Done');
                 }
             } catch (err) {
                 console.error("Error fetching user:", err.message);
@@ -37,6 +51,10 @@ export default function LoginModal() {
         fetchUser();
     }, [setAuthUserData]);
 
+    const handleLoginModalToFalse = () => {
+        setShowisAuthPage(false);
+    }
+
     return (
         <div className="modal-backdrop">
             <div className="modal-content">
@@ -45,7 +63,9 @@ export default function LoginModal() {
                 <p>Please sign in to continue</p>
 
                 <div className="btn-group">
-                    <button className="oauth-btn github" disabled>
+                    <button className="oauth-btn github"
+                        onClick={handleGithubAuthentication}
+                    >
                         <img
                             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
                             alt="GitHub"
@@ -63,7 +83,9 @@ export default function LoginModal() {
                     </button>
                 </div>
 
-                <button className="cancel-btn">Cancel</button>
+                <button className="cancel-btn"
+                    onClick={handleLoginModalToFalse}
+                >Cancel</button>
             </div>
         </div>
     );

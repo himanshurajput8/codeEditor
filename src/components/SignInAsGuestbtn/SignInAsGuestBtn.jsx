@@ -8,7 +8,7 @@ export default function SignInAsGuestBtn() {
     setShowisAuthPage,
     isUserLogged,
     AuthUserData,
-    isAuthLoading // 👈 added to wait until auth is resolved
+    isAuthLoading
   } = useContext(AuthContext);
 
   console.log("Auth status:", { isUserLogged, AuthUserData, isAuthLoading });
@@ -17,9 +17,9 @@ export default function SignInAsGuestBtn() {
     setShowisAuthPage(true);
   };
 
-  // ⏳ Wait until auth is resolved before rendering anything
+  
   if (isAuthLoading) {
-    return null; // Or a loading spinner if desired
+    return null; 
   }
 
   // 📍 Show login modal if auth page is triggered
