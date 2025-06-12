@@ -1,8 +1,11 @@
 import { useContext } from "react";
 import { AuthContext } from "../../ContextAPI/AuthUser";
 import LoginModal from "../LoginModal/LoginModal";
+import { LoginModalContext } from "../../ContextAPI/LoginModalContext";
 
 export default function SignInAsGuestBtn() {
+  const { showLoginModal, setShowLoginModal } = useContext(LoginModalContext);
+  
   const {
     isAuthPage,
     setShowisAuthPage,
@@ -11,12 +14,12 @@ export default function SignInAsGuestBtn() {
     isAuthLoading
   } = useContext(AuthContext);
 
-  console.log("Auth status:", { isUserLogged, AuthUserData, isAuthLoading });
-
   const handleAuthPage = () => {
     setShowisAuthPage(true);
+    setShowLoginModal(true);
   };
 
+  if (showLoginModal) return <LoginModal />;
   
   if (isAuthLoading) {
     return null; 
@@ -45,6 +48,7 @@ export default function SignInAsGuestBtn() {
   // 👤 Default: show guest login button
   return (
     <button className="guest-signin" onClick={handleAuthPage}>
+      <img src="/signinHeader.png" alt="" />
       Sign In as Guest
     </button>
   );

@@ -6,6 +6,7 @@ html {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+  text-decoration: none;
 }
 
 .remote-cursor {
@@ -199,4 +200,28 @@ html {
 .replayer-wrapper{
   top: 0% !important;
   left: 0% !important;
+}
+
+:root {
+  --logo-color: #60b54b;
+  --main-white: #DEFFDC;
+  --light-grey: #212525;
+  --dull-green:  #859984;
+}
+
+
+.light-green-span{
+  color: var(--main-white);
+}
+
+.dark-green-span{
+  color: var(--logo-color);
+}
+
+.dull-green-color{
+  color: var(--dull-green);
+}
+
+.light-green-color{
+  color: var(--main-white);
 }

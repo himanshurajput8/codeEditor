@@ -75,9 +75,6 @@ export default function RecordingNavIconsHeader() {
           <img src="/play.png" alt="Replay Recording" style={{ height: '30px' }} />
         </button>
       )}
-      <button onClick={clearRecording}>
-        Clear Recording
-      </button>
     </div>
   );
 }
