@@ -10,6 +10,7 @@ export const AuthContextProvider = ({ children }) => {
   const [justLoggedIn, setJustLoggedIn] = useState(false);
   const [isAuthLoading, setIsAuthLoading] = useState(true); // 🟢 NEW
 
+  
   useEffect(() => {
     // Initial session load
     supabase.auth.getSession().then(({ data: { session } }) => {

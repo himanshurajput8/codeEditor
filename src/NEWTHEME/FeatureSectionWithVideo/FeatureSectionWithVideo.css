@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+/* Main Layout */
+.feature-layout {
+  display: flex;
+  background-color: #000;
+  color: #d4f7c5;
+  min-height: 100vh;
+  padding: 2rem;
+  gap: 2rem;
+  font-family: 'Inter', sans-serif;
+}
+
+/* LEFT scrollable features */
+.feature-left {
+  flex: 1;
+  padding-right: 2rem;
+  overflow-y: auto;
+}
+
+/* Feature Cards */
+.feature-card {
+  position: relative;
+  background-color: #0e0e0e;
+  border: 1px solid #1a1a1a;
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 20px rgba(0, 255, 128, 0.1);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+
+  max-width: 700px;
+  width: 100%;
+  color: #fff;
+}
+
+/* Icon + Text Layout */
+.feature-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+  color: #6aff72;
+  display: flex;
+  align-items: center;
+}
+
+.feature-icon svg {
+  height: 3rem;
+  width: 3rem;
+  fill: currentColor;
+}
+
+/* Feature Texts */
+.feature-texts h4 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+  color: #ffffff;
+}
+
+.feature-texts h4 .highlight {
+  color: #6aff72;
+}
+
+.feature-texts p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #cccccc;
+  max-width: 600px;
+}
+
+/* RIGHT Sticky Video */
+.feature-right {
+  width: 50vw;
+  position: sticky;
+  top: 0;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fixed-video {
+  position: absolute;
+  width: 140%;
+  height: auto;
+  max-height: 12  0%;
+  border-radius: 20px;
+  object-fit: cover;
+  top: 0;
+  right: -30vw;
+}
+
+/* Section Title */
+.features-h1 {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  text-decoration: underline;
+  color: var(--main-white);
+  font-size: 3.5rem;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  margin-bottom: 3rem;
+}
+
+
+.features-h1:hover{
+  transform: scale(1.2);
+  color: var(--logo-color);
+  transition: 0.7s ease-in-out;
+}
+
+.feature-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.coming-soon-badge {
+  position: absolute;
+  top: 2.5rem;
+  right: 1rem;
+  background-color: #1a1a1a;
+  color: #66ffb3;
+  border: 1px solid #2a2a2a;
+  font-size: 0.75rem;
+  padding: 1rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}

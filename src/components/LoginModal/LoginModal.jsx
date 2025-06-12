@@ -3,11 +3,15 @@ import './LoginModal.css';
 import { supabase } from '../Supabase/SupabaseClient';
 import { AuthContext } from '../../ContextAPI/AuthUser';
 import { log } from 'socket.io-client/dist/socket.io.js';
+import { LoginModalContext } from '../../ContextAPI/LoginModalContext';
+import { XMarkIcon } from '@heroicons/react/24/outline';
+
 
 export default function LoginModal() {
-
-    const { AuthUserData, setAuthUserData ,setShowisAuthPage} = useContext(AuthContext);
-
+    const redirectTo = window.location.origin + '/auth/callback';
+    const { setShowLoginModal } = useContext(LoginModalContext);
+    const { setAuthUserData } = useContext(AuthContext);
+    
     const handleGoogleAuthentication = async () => {
         try {
             const { data, error } = await supabase.auth.signInWithOAuth({
@@ -24,6 +28,9 @@ export default function LoginModal() {
         try {
             const { data, error } = await supabase.auth.signInWithOAuth({
                 provider: 'github',
+                options: {
+                    redirectTo
+                }
             });
             console.log("Github Auth Response:", data);
             if (error) throw error;
@@ -31,7 +38,6 @@ export default function LoginModal() {
             console.error("Github Auth Error:", err.message);
         }
     };
-    
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -40,7 +46,7 @@ export default function LoginModal() {
                 const { data, error } = await supabase.auth.getUser();
                 if (error) throw error;
                 if (data?.user) {
-                    setAuthUserData(data.user);  
+                    setAuthUserData(data.user);
                     console.log('Done');
                 }
             } catch (err) {
@@ -52,41 +58,63 @@ export default function LoginModal() {
     }, [setAuthUserData]);
 
     const handleLoginModalToFalse = () => {
-        setShowisAuthPage(false);
+        // setShowisAuthPage(false);
+        setShowLoginModal(false);
     }
 
     return (
-        <div className="modal-backdrop">
-            <div className="modal-content">
-                <h1>Welcome to</h1>
-                <h1>Code2gthr</h1>
-                <p>Please sign in to continue</p>
+        <>
+            <div className="modal-wrapper">
+                <div className="modal-left">
+                    <img className="modal-logo" src="/logoGreen.png" alt="Logo" />
 
-                <div className="btn-group">
-                    <button className="oauth-btn github"
-                        onClick={handleGithubAuthentication}
-                    >
-                        <img
-                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
-                            alt="GitHub"
-                        />
-                        Sign In With GitHub
+                    <h1 className="modal-title">Sign up for CodeTogether</h1>
+                    <p className="modal-subtitle">Get started with $300 free monthly !</p>
+
+                    <div className="modal-buttons">
+                        <button className="modal-btn outline"
+                            onClick={handleGithubAuthentication}
+                        >
+                            <img
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+                                alt="GitHub"
+                            />
+                            Continue with GitHub
+                        </button>
+                        <button className="modal-btn outline"
+                            onClick={handleGoogleAuthentication}
+                        >
+                            <img
+                                src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                                alt="Google"
+                            />
+                            Continue with Google
+                        </button>
+                    </div>
+
+                    <button className="modal-text-link">
+                        Try the playground first <span>→</span>
                     </button>
 
-                    <button className="oauth-btn google" 
-                        onClick={handleGoogleAuthentication}>
-                        <img
-                            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-                            alt="Google"
-                        />
-                        Sign In With Google
-                    </button>
+                    <div className="modal-footer">
+                        <p>
+                            By proceeding, you agree to our <a href="#">terms of service</a>.
+                        </p>
+                        <p>
+                            Already have an account? <a href="#">Log in</a>
+                        </p>
+                    </div>
                 </div>
 
-                <button className="cancel-btn"
+                <div className="modal-right">
+                    <img src="/LoginModalRightImg.webp" alt="Code Graphic" />
+                </div>
+                <button className="cancel-btn close-modal"
                     onClick={handleLoginModalToFalse}
-                >Cancel</button>
+                >
+                 Close   
+                </button>
             </div>
-        </div>
+        </>
     );
 }
