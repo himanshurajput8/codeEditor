@@ -13,11 +13,75 @@ html {
 }
 
 :root {
-  --logo-color: #60b54b;
-  --main-white: #DEFFDC;
-  --light-grey: #212525;
-  --dull-green: #859984;
+  --logo-color:   #60b54b;
+  --main-white:   #DEFFDC;
+  --light-grey:   #212525;
+  --dull-green:   #859984;
+  --lemon-color:  #DCFF51;
+  --lemon-loght:  #F5FFCB;
 }
+
+[data-theme="default"] {
+  --logo-color:   #60b54b;
+  --main-white:   #DEFFDC;
+  --light-grey:   #212525;
+  --dull-green:   #859984;
+  --lemon-color:  #DCFF51;
+  --lemon-loght:  #F5FFCB;
+}
+
+[data-theme="lemon"] {
+  --logo-color: #DCFF51;
+  --main-white:   #F5FFCB;
+  --bg-color: #fffbe6;
+}
+
+[data-theme="cyberpunk"] {
+  --logo-color: #ff007c;
+  --main-white: #f5f5f5;
+  --light-grey: #1a1a1a;
+  --dull-green: #00fff7;
+  --lemon-color: #ffef00;
+  --lemon-loght: #ffedb3;
+}
+
+[data-theme="forest"] {
+  --logo-color: #2d6a4f;
+  --main-white: #e6ffe6;
+  --light-grey: #0f3d2e;
+  --dull-green: #52796f;
+  --lemon-color: #cad2c5;
+  --lemon-loght: #e9edc9;
+}
+
+[data-theme="solar-light"] {
+  --logo-color: #268bd2;
+  --main-white: #fdf6e3;
+  --light-grey: #eee8d5;
+  --dull-green: #93a1a1;
+  --lemon-color: #b58900;
+  --lemon-loght: #fef6c2;
+}
+
+[data-theme="lavender"] {
+  --logo-color: #8e44ad;
+  --main-white: #f5e6ff;
+  --light-grey: #2c2c54;
+  --dull-green: #a29bfe;
+  --lemon-color: #fd79a8;
+  --lemon-loght: #ffeaa7;
+}
+
+
+[data-theme="contrast-dark"] {
+  --logo-color: #F1F1F1;        /* Softer than pure white */
+  --main-white: #cf9191;        /* High contrast, easy on the eyes */
+  --light-grey: #1A1A1A;        /* Deep grey for backgrounds */
+  --dull-green: #7FB77E;        /* Soft muted green, gentle on dark backgrounds */
+  --lemon-color: #FFD93D;       /* Warm yellow, good contrast with dark */
+  --lemon-light: #2C2C2C;       /* Dark charcoal grey for light contrast items */
+}
+
 
 
 .light-green-span {

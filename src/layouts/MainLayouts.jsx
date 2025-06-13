@@ -4,6 +4,8 @@ import AuthCallback from "../components/AuthCallback/AuthCallback";
 import SharedRecording from "../pages/SharedRecording/ShareRecording";
 import LandingPage from "../pages/Landing/LandingPage";
 import {EditorComp} from '../pages/Editor/Editor'
+import ProtectedRoutes from "../Routes/ProtectedRoutes";
+import PageNotFound from '../pages/PageNotFound/PageNotFound'
 
 export const MainLayout = () => {
 
@@ -18,7 +20,11 @@ export const MainLayout = () => {
 
                 <Route path='/editor/:id' element={<EditorComp />}/>
 
-                <Route path='/sessions' element={ <Sessions />}/>
+                <Route path='/sessions' element={
+                    <ProtectedRoutes>
+                        <Sessions />
+                    </ProtectedRoutes>
+                    }/>
 
                 <Route path='/shared/:token'element={<SharedRecording />}/>
 
@@ -26,7 +32,7 @@ export const MainLayout = () => {
 
                 <Route path="/contact" element={<h1>Contact US</h1>}/>
 
-                <Route path="*" element={<div>404 - Page Not Found</div>} />
+                <Route path="*" element={<PageNotFound />} />
 
             </Routes>
         </>

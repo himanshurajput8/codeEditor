@@ -1,14 +1,15 @@
 import { useContext, useState, useEffect, useRef } from 'react';
 import './header2.css';
-import { Route, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { userNameContext } from '../../ContextAPI/UserNameContext';
-import UserNameModal from '../ModalComponent/UserNameModal';
 import { NavContext } from '../../ContextAPI/NavBarContext';
 import RecordingNavIconsHeader from '../../components/RRWEB/RecordingNavIconsHeader/RecordingNavIconsHeader';
 import SignInAsGuestBtn from '../../components/SignInAsGuestbtn/SignInAsGuestBtn';
 import { AuthContext } from '../../ContextAPI/AuthUser';
 import logoutUser from '../../components/Supabase/supabaseLogout';
 import { GifContext } from '../../ContextAPI/GifContext';
+import ToggleThemes from '../../components/ToggleThemes/ToggleThemes';
+
 
 export const Header2 = () => {
   const [showDropDown, setShowDropDown] = useState(false);
@@ -23,6 +24,7 @@ export const Header2 = () => {
   const { showGif, setShowGif } = useContext(GifContext);
   const gifTimeoutRef = useRef(null);
   const currentPath = location.pathname.replace("/", "");
+
   const navItems = [
     { id: "home", label: "Home" , route : ''},
     { id: "features", label: "Features" , route : 'features'},
@@ -71,6 +73,13 @@ export const Header2 = () => {
     return () => clearTimeout(gifTimeoutRef.current);
   }, [showGif]);
 
+  const handleTheme = (themeName) => {
+    // document.documentElement.style.setProperty('--logo-color' , 'var(--lemon-color)');  Jab Ek color ko dusre me change karna ho
+
+    document.documentElement.setAttribute('data-theme', themeName);
+
+  }
+
   return (
     <>
       <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
@@ -89,7 +98,7 @@ export const Header2 = () => {
                 {navItems.map((item) => (
                   <li
                     key={item.id}
-                    className={currentPath === item.id ? "active" : ""}
+                    className={currentPath === item.id ? "active" : "defaultLogo"}
                     onClick={() => navigate(`/${item.route}`)}
                   >
                     {item.label}
@@ -97,7 +106,7 @@ export const Header2 = () => {
                 ))}
                 {isUserLogged && (
                   <li
-                    className={currentPath === "sessions" ? "active" : ""}
+                    className={currentPath === "sessions" ? "active" : "defaultLogo"}
                     onClick={() => navigate('/sessions')}
                   >
                     Sessions
@@ -123,7 +132,9 @@ export const Header2 = () => {
                 <div className="dropdown">  
                   <p
                     onClick={logoutUser}
-                  >Logout</p>
+                    >Logout
+                  </p>
+                  <ToggleThemes />
                 </div>
               )}
             </div>

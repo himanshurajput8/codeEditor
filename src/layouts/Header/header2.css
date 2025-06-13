@@ -57,7 +57,7 @@ body {
   cursor: pointer;
   font-size: 1rem;
   font-weight: 500;
-  color: #ddd;
+  color: var(--main-white);
   transition: color 0.2s;
 }
 
@@ -167,7 +167,7 @@ body {
 }
 
 .active{
-  color: #60b54b !important;
+  color: var(--logo-color) !important;
 }
 
 @media (max-width: 768px) {
@@ -191,3 +191,7 @@ body {
   display: flex;
   align-items: center;
 } */
+
+.defaultLogo{
+  color: var(--main-white);
+}

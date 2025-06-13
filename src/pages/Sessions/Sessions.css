@@ -12,7 +12,7 @@
 }
 
 .recording-card:hover{
-  border: 1px solid var(--logo-color);
+  border: .15px dashed var(--logo-color);
   box-shadow: rgba(45, 82, 56, 0.1) 0px 4px 12px;
   border-radius: 6px;
 }

@@ -22,24 +22,24 @@
 
 /* Solid Green Button */
 .btn-primary {
-  background-color: #7ef96c;
+  background-color: var(--logo-color);
   color: #000;
   border: none;
 }
 
 .btn-primary:hover {
-  background-color: #6eff5a;
+  background-color: var(--logo-color);
 }
 
 /* Outlined Button */
 .btn-outline {
   background-color: transparent;
-  border: 1px solid #7ef96c;
-  color: #d4f7c5;
+  border: 1px solid var(--logo-color);
+  color: var(--main-white);
 }
 
 .btn-outline:hover {
-  background-color: #7ef96c;
+  background-color: var(--logo-color);
   color: #000;
 }
 
@@ -47,7 +47,7 @@
 .btn-text {
   background: none;
   border: none;
-  color: #d4f7c5;
+  color: var(--main-white);
   font-weight: 500;
   padding: 0.8rem 0;
   display: flex;
