@@ -1,28 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=WDXL+Lubrifont+TC&display=swap');
 
-
 .hero-container {
     display: flex;
     flex-direction: row;
     width: 100vw;
-    padding: 12vh 5vw 0vh 5vw;
+    padding: 12vh 5vw 10vh 5vw;
     min-height: 70vh;
     max-height: 100vh;
     justify-content:space-around;   
     gap: 10rem;
 }
 
-/* .hero-container div{
-  width: 50%;
-} */
+.hero-container-left {
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content:space-around;
+}
 
 .hero-title {
+    flex-direction: column;
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
-    /* Change as needed: 300, 500, 700 etc. */
     font-style: normal;
-    font-size: 4.5rem;
+    font-size: 4rem;
     color: var(--main-white);
 }
 
@@ -30,27 +33,31 @@
     color: var(--logo-color);
 }
 
-.hero-container-left {
-    width: 60vw;
-    
-}
 
 .hero-container-right { 
+    width: 50vw;
+    height: 100%;
+    min-height: 70vh;
+    max-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-container-right video{
+    position: absolute;
     width: 40vw;
-    margin-top: -30vh;
+    height: 80vh;
 }
 
 .hero-subtext{
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
-    /* Change as needed: 300, 500, 700 etc. */
     font-style: normal;
     font-size: 1.4rem;
     color: var(--main-white);
-    width: 25vw;
 }
-
 
 
 
@@ -74,7 +81,8 @@
 .wave-img{
     border: 1px solid pink;
     border-radius: 60px 80px;
-
 }
+
+
 
 

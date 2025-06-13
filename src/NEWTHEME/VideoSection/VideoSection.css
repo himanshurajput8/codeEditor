@@ -29,28 +29,29 @@ body {
 }
 
 .custom-highlight {
-  color: #72ff72;
+  color: var(--logo-color);
   font-weight: bold;
 }
 
 .custom-hero-left p {
   font-size: 1rem;
-  color: #ccc;
+  color: var(--main-white);
   margin-bottom: 1.5rem;
 }
 
 .custom-hero-button {
   padding: 0.6rem 1.2rem;
   background-color: transparent;
-  color: #cdd6c6;
-  border: 1px solid #4eff4e;
+  color: var(--main-white);
+  border: 1px solid var(--logo-color);
   border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
 .custom-hero-button:hover {
-  background-color: #144d2a;
+  color: black;
+  background-color: var(--logo-color);
 }
 
 .custom-hero-right {

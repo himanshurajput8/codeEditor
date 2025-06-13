@@ -2,13 +2,14 @@ import { useContext, useState, useEffect, useRef } from 'react';
 import './header2.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { userNameContext } from '../../ContextAPI/UserNameContext';
-import UserNameModal from '../ModalComponent/UserNameModal';
 import { NavContext } from '../../ContextAPI/NavBarContext';
 import RecordingNavIconsHeader from '../../components/RRWEB/RecordingNavIconsHeader/RecordingNavIconsHeader';
 import SignInAsGuestBtn from '../../components/SignInAsGuestbtn/SignInAsGuestBtn';
 import { AuthContext } from '../../ContextAPI/AuthUser';
 import logoutUser from '../../components/Supabase/supabaseLogout';
 import { GifContext } from '../../ContextAPI/GifContext';
+import ToggleThemes from '../../components/ToggleThemes/ToggleThemes';
+
 
 export const Header2 = () => {
   const [showDropDown, setShowDropDown] = useState(false);
@@ -19,15 +20,20 @@ export const Header2 = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { isnav, setNav } = useContext(NavContext);
   const location = useLocation();
+  const pathnameForRecordings = useLocation();
   const { showGif, setShowGif } = useContext(GifContext);
   const gifTimeoutRef = useRef(null);
-  
+  const currentPath = location.pathname.replace("/", "");
+
   const navItems = [
-    { id: "home", label: "Home" },
-    { id: "features", label: "Features" },
-    { id: "contact", label: "Contact Us" },
+    { id: "home", label: "Home" , route : ''},
+    { id: "features", label: "Features" , route : 'features'},
+    { id: "contact", label: "Contact Us" , route : 'contact'},
   ];
   const dropdownRef = useRef(null);
+
+  const isInsideEditor = location.pathname.startsWith('/editor/'); 
+  
 
   const handleGoToHome = () => {
     navigate('/');
@@ -67,6 +73,13 @@ export const Header2 = () => {
     return () => clearTimeout(gifTimeoutRef.current);
   }, [showGif]);
 
+  const handleTheme = (themeName) => {
+    // document.documentElement.style.setProperty('--logo-color' , 'var(--lemon-color)');  Jab Ek color ko dusre me change karna ho
+
+    document.documentElement.setAttribute('data-theme', themeName);
+
+  }
+
   return (
     <>
       <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
@@ -80,43 +93,30 @@ export const Header2 = () => {
             )}
             Code2gthr
           </div>
-          {isnav ?
             <nav className="header-nav">
               <ul>
                 {navItems.map((item) => (
                   <li
                     key={item.id}
-                    className={activeLink === item.id ? "active" : ""}
-                    onClick={() => {
-                      if (location.pathname !== '/') {
-                        navigate('/');
-                      } else {
-                        const el = document.getElementById(item.id);
-                        if (el) {
-                          el.scrollIntoView({ behavior: 'smooth' });
-                        }
-                      }
-                      setActiveLink(item.id);
-                    }
-                    }
+                    className={currentPath === item.id ? "active" : "defaultLogo"}
+                    onClick={() => navigate(`/${item.route}`)}
                   >
-                    <a href={`#${item.id}`}>{item.label}</a>
+                    {item.label}
                   </li>
                 ))}
                 {isUserLogged && (
                   <li
-                    className={activeLink === "sessions" ? "active" : ""}
-                    onClick={() => {
-                      setActiveLink("sessions");
-                      navigate('/sessions');
-                    }}
+                    className={currentPath === "sessions" ? "active" : "defaultLogo"}
+                    onClick={() => navigate('/sessions')}
                   >
                     Sessions
                   </li>
                 )}
+
               </ul>
             </nav>
-            : <RecordingNavIconsHeader />}
+            
+
           {isUserLogged ? (
             <div className="header-userName-dropDown" ref={dropdownRef}>
               <p>{AuthUserData?.user_metadata?.name || userName}</p>
@@ -128,21 +128,25 @@ export const Header2 = () => {
                 onClick={toggleDropDown}
               />
 
-              {/* <button >X</button> */}
               {showDropDown && (
-                <div className="dropdown">
+                <div className="dropdown">  
                   <p
                     onClick={logoutUser}
-                  >Logout</p>
+                    >Logout
+                  </p>
+                  <ToggleThemes />
                 </div>
               )}
             </div>
           ) : (
-            <SignInAsGuestBtn />
+            <>
+              <SignInAsGuestBtn />
+            </>
           )}
         </div>
       </header>
-      <div style={{ height: "12vh" }} id='home' />
+      <div style={{ height: "12vh"}} id='home'/>
+      {isInsideEditor && isUserLogged && <RecordingNavIconsHeader />}
     </>
   );
 };

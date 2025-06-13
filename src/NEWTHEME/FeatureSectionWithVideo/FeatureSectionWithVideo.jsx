@@ -75,7 +75,7 @@ export default function FeatureSectionWithVideo() {
         </div>
 
         <div className="feature-right">
-          <video className="fixed-video" autoPlay muted loop src="m2.mp4" />
+          <video className="fixed-video" autoPlay muted loop src="Videos/m2.mp4" />
         </div>
       </div>
     </>

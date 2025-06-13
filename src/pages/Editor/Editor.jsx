@@ -213,15 +213,15 @@ export const EditorComp = () => {
             <div
                 ref={containerRef}
                 style={{
-                    height: isFullScreen ? '100vh' : '92vh',
+                    height: isFullScreen ? '100vh' : 'auto',
                     width: isSettingOpen ? '82vw' : '100%',
                     transition: 'width 0.5s ease',
-                    border: '1px solid gray',
+                    border: '1px solid var(--logo-color)',
                     overflow: 'hidden',
                 }}
             >
                 <Editor
-                    height={isFullScreen ? '100vh' : '92vh'}
+                    height={isFullScreen ? '100vh' : '88vh'}
                     width='100%'
                     language={languageChoosed.language}
                     value={code}

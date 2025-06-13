@@ -4,6 +4,7 @@ import { startRecording, stopRecording, clearRecording } from '../rrwebFunctions
 import { AuthContext } from '../../../ContextAPI/AuthUser';
 import {v4 as uuidv4} from 'uuid';
 import { supabase } from '../../Supabase/SupabaseClient';
+import './RecordingNav.css'
 
 export default function RecordingNavIconsHeader() {
   const { recording, setRecording, stopFnRef} = useContext(RrwebContext);
@@ -37,6 +38,8 @@ export default function RecordingNavIconsHeader() {
   }, [recording]);
 
   const handleRecord = () => {
+    console.log('recording started');
+    
     const recordingId = uuidv4();
     recordingIdRef.current = recordingId;
     startRecording(stopFnRef);
@@ -61,20 +64,21 @@ export default function RecordingNavIconsHeader() {
   return (
     <div className='no-record-by-rrweb'>
       {!recording ? (
+        <>
         <button onClick={handleRecord} style={{ backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }}>
           <img src="/image.png" alt="Start Recording" style={{ height: '40px' }} />
         </button>
+        </>
       ) : (
         <button onClick={handleStop} style={{ backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }}>
           <img src="/stop.png" alt="Stop Recording" style={{ height: '40px' }} />
         </button>
       )}
-
-      {hasRecording && (
+      {/* {hasRecording && (
         <button onClick={handleReplay} style={{ backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }}>
           <img src="/play.png" alt="Replay Recording" style={{ height: '30px' }} />
         </button>
-      )}
+      )} */}
     </div>
   );
 }

@@ -1,9 +1,7 @@
-
 .code-languages-container {
-  background-color: #ffffff;
-  color: #000000;
+  color: var(--main-white);
   font-family: sans-serif;
-  padding: 40px 80px;
+  padding: 10vh 5vw;
   display: flex;
   flex-wrap: wrap;
   justify-content:space-around;
@@ -34,6 +32,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  color: var(--logo-color);
 }
 
 .language-icon {

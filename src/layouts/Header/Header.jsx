@@ -70,6 +70,7 @@ export const Header = () => {
           <img src="/curly1.jpeg" alt="logo" />
           Code2gthr
         </div>
+        
         {isnav ? (
           <nav className="header-nav">
             <ul>

@@ -17,7 +17,7 @@ const Homepage2 = () => {
   const onShareClick = () => {
     if (isUserLogged) {
       const id = nanoid(12);
-      navigate(`${id}`);
+      navigate(`/editor/${id}`);
     }
     else {
       setShowLoginModal(true)
@@ -26,7 +26,7 @@ const Homepage2 = () => {
 
   const handleDemo = () => {
     console.log(document.body);
-    
+
   }
   return (
     <>
@@ -34,22 +34,32 @@ const Homepage2 = () => {
         <div className="hero-container-left">
 
           <h1 className="hero-title" >
-            Where <span>Interviewers</span> and <span>Developers</span> Meet to <span>Code</span>
-            <br />
+            Where <span>Interviewers</span> 
+            <br/>
+            and <span>Developers
+            <br/>  
+            </span> Meet to <span>Code</span>
             <span>⚡</span>
           </h1>
-        </div>
-
-        <div className="hero-container-right">
           <p className="hero-subtext">
             A real-time collaborative code editor built for pair programming, interviews, and remote learning.
             No installs. No sign-ups. Just share a link and start coding.
           </p>
         </div>
+        <div className="hero-container-right">
+          <video
+            className="custom-hero-video video1"
+            autoPlay
+            muted
+            loop
+            src="Videos/Modal_CTA.mp4"
+          ></video>
+        </div>
       </div>
 
       {/* HERO SECTION COMPLETED */}
-      <ButtonGroup onShareClick={onShareClick} onBookDemo={handleDemo}/>
+      <ButtonGroup onShareClick={onShareClick} onBookDemo={handleDemo} />
+      {showLoginModal && <LoginModal/>}
     </>
   );
 };

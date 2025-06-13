@@ -10,6 +10,7 @@ import { RrwebContext, RrwebContextProvider } from './ContextAPI/RrwebContext.js
 import { AuthContextProvider } from './ContextAPI/AuthUser.jsx'
 import { LoginModalProvider } from './ContextAPI/LoginModalContext.jsx'
 import { GifContextProvider } from './ContextAPI/GifContext.jsx'
+import { ToggleUiThemeProvider } from './ContextAPI/ToggleUITheme.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -22,7 +23,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <AuthContextProvider>
                   <LoginModalProvider>
                     <GifContextProvider>
-                      <App />
+                      <ToggleUiThemeProvider>
+                        <App />
+                      </ToggleUiThemeProvider>
                     </GifContextProvider>
                   </LoginModalProvider>
                 </AuthContextProvider>
