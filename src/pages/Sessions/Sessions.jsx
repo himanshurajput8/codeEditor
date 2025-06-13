@@ -5,6 +5,7 @@ import './Sessions.css';
 import RrwebPlayerComponent from '../../components/Player/RrwebPlayer';
 import { v4 as uuidv4 } from 'uuid';
 import { TrashIcon, ShareIcon } from '@heroicons/react/24/outline';
+import DotLoading from '../../components/DotLoading/DotLoading'
 
 export default function Sessions() {
   const [recordingData, setRecordingData] = useState([]);
@@ -80,7 +81,7 @@ export default function Sessions() {
       <div className='redording-heading'><h2 className="sessions-title"> <span className='light-green-span'> Your Recording </span> <span className='dark-green-span'> Sessions</span></h2></div>
 
       {loading ? (
-        <p className="loading-text">Loading...</p>
+        <DotLoading />
       ) : recordingData.length === 0 ? (
         <p className="no-recordings-text">No recordings found.</p>
       ) : (

@@ -11,6 +11,12 @@
   cursor: pointer;
 }
 
+.recording-card:hover{
+  border: 1px solid var(--logo-color);
+  box-shadow: rgba(45, 82, 56, 0.1) 0px 4px 12px;
+  border-radius: 6px;
+}
+
 .recording-screenshot {
   width: 100%;
   height: 100%;

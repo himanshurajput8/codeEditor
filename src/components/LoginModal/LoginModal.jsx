@@ -13,23 +13,28 @@ export default function LoginModal() {
     const { setAuthUserData } = useContext(AuthContext);
     
     const handleGoogleAuthentication = async () => {
-        try {
-            const { data, error } = await supabase.auth.signInWithOAuth({
-                provider: 'google',
-            });
-            console.log("Google Auth Response:", data);
-            if (error) throw error;
-        } catch (err) {
-            console.error("Google Auth Error:", err.message);
-        }
-    };
+    try {
+        const { data, error } = await supabase.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+                redirectTo,
+            },
+        });
+        console.log("Google Auth Response:", data);
+        if (error) throw error;
+    } catch (err) {
+        console.error("Google Auth Error:", err.message);
+    }
+};
+
 
     const handleGithubAuthentication = async () => {
+        console.log('In Github');
         try {
             const { data, error } = await supabase.auth.signInWithOAuth({
                 provider: 'github',
                 options: {
-                    redirectTo
+                    redirectTo 
                 }
             });
             console.log("Github Auth Response:", data);

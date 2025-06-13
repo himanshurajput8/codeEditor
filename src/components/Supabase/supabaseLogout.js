@@ -13,5 +13,4 @@ const logoutUser = async () => {
     }
 };
 
-
 export default logoutUser;

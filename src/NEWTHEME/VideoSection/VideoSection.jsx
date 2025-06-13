@@ -11,7 +11,7 @@ export default function VideoSection() {
                         autoPlay
                         muted
                         loop
-                        src="m1.mp4"
+                        src="Videos/m1.mp4"
                     ></video>
                 </div>
             </div>
