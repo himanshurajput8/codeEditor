@@ -34,7 +34,8 @@ export const Header2 = () => {
 
   const isInsideEditor = location.pathname.startsWith('/editor/'); 
   
-
+  const isOn404Page = location.pathname.startsWith('/*'); 
+  
   const handleGoToHome = () => {
     navigate('/');
     setNav(true);
@@ -43,6 +44,7 @@ export const Header2 = () => {
   }
   const toggleDropDown = () => setShowDropDown(prev => !prev);
 
+  
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -72,13 +74,6 @@ export const Header2 = () => {
 
     return () => clearTimeout(gifTimeoutRef.current);
   }, [showGif]);
-
-  const handleTheme = (themeName) => {
-    // document.documentElement.style.setProperty('--logo-color' , 'var(--lemon-color)');  Jab Ek color ko dusre me change karna ho
-
-    document.documentElement.setAttribute('data-theme', themeName);
-
-  }
 
   return (
     <>

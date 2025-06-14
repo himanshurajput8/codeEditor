@@ -65,3 +65,36 @@
     border-bottom-right-radius: 10px;
   }
 }
+
+
+@media (max-width: 768px) {
+  .features-bar {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.8rem;
+  }
+
+  .feature-box {
+    flex: 1 1 45%;
+    min-width: 140px;
+    height: auto;
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  /* Optional: handle 1-item or 3+2 grid better */
+  .feature-box:nth-child(odd) {
+    margin-right: 0.5rem;
+  }
+
+  .feature-box:nth-child(even) {
+    margin-left: 0.5rem;
+  }
+
+  .icon {
+    width: 18px;
+    height: 18px;
+  }
+}
