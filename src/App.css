@@ -30,11 +30,11 @@ html {
   --lemon-loght:  #F5FFCB;
 }
 
-[data-theme="lemon"] {
+/* [data-theme=""] {
   --logo-color: #DCFF51;
   --main-white:   #F5FFCB;
   --bg-color: #fffbe6;
-}
+} */
 
 [data-theme="cyberpunk"] {
   --logo-color: #ff007c;
@@ -55,8 +55,11 @@ html {
 }
 
 [data-theme="solar-light"] {
-  --logo-color: #268bd2;
-  --main-white: #fdf6e3;
+  --logo-color: #DCFF51;
+  --main-white:   #F5FFCB;
+  --bg-color: #fffbe6;
+  /* --main-white: #268bd2; */
+  /* --main-white: #fdf6e3; */
   --light-grey: #eee8d5;
   --dull-green: #93a1a1;
   --lemon-color: #b58900;
@@ -81,8 +84,6 @@ html {
   --lemon-color: #FFD93D;       /* Warm yellow, good contrast with dark */
   --lemon-light: #2C2C2C;       /* Dark charcoal grey for light contrast items */
 }
-
-
 
 .light-green-span {
   color: var(--main-white);

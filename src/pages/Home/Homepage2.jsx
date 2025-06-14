@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 import { NavContext } from "../../ContextAPI/NavBarContext";
 import { useContext, useState } from "react";
-import { nanoid } from "nanoid";
+import { nanoid ,customAlphabet} from "nanoid";
 import { AuthContext } from "../../ContextAPI/AuthUser";
 import LoginModal from "../../components/LoginModal/LoginModal";
 import { LoginModalContext } from '../../ContextAPI/LoginModalContext'
@@ -16,7 +16,9 @@ const Homepage2 = () => {
 
   const onShareClick = () => {
     if (isUserLogged) {
-      const id = nanoid(12);
+      const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      const nanoid = customAlphabet(alphabet,12);
+      const id = nanoid();
       navigate(`/editor/${id}`);
     }
     else {
