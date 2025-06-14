@@ -130,3 +130,21 @@
   font-weight: bold;
   letter-spacing: 0.05em;
 }
+
+
+@media (max-width:768px) {
+  .feature-layout{
+    display: flex;
+    flex-direction: column;
+
+  }
+  .feature-right{
+    max-height: 50vh;
+    /* width: 300%; */
+  }
+  .fixed-video{
+    width: 300%;
+    right: -100vw;
+    top: -15vh;
+  }
+}

@@ -234,3 +234,15 @@
   background-color: var(--main-white);
   border-color: rgba(212, 247, 197, 0.6);
 }
+
+
+@media (max-width:768px) {
+  .recording-card{
+    flex-direction: column;
+    height: auto;
+    border: 1px solid var(--main-white);
+  }
+  .single-session-left{
+    width: 100%;
+  }
+}
