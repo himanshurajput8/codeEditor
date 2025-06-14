@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { io } from 'socket.io-client';
 import Editor from '@monaco-editor/react';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import AsideBar from '../../layouts/AsideBAr/AsideBar';
 import { FullScreenContext } from '../../ContextAPI/ToggleFullScreenContext';
 import { ThemeContext } from '../../ContextAPI/ThemeContext';
@@ -20,18 +20,21 @@ export const EditorComp = () => {
     const [userColors, setUserColors] = useState({});
     const [remoteCursors, setRemoteCursors] = useState({});
     const [remoteSelection, setRemoteSelection] = useState(null);
-
+    const [roomValid, setRoomValid] = useState(null);
     const socketRef = useRef(null);
     const editorRef = useRef(null);
     const containerRef = useRef(null);
     const isRemoteUpdate = useRef(false);
     const remoteCursorDecorationIds = useRef([]);
-
     const { isFullScreen, fontSize, miniMap, isSettingOpen } = useContext(FullScreenContext);
     const { themeCoosed } = useContext(ThemeContext);
     const { languageChoosed } = useContext(LanguageContext);
 
-    // Layout on fullscreen/setting change
+    useEffect(() => {
+        const isValidFormat = /^[A-Za-z0-9]{12}$/.test(roomId);
+        setRoomValid(isValidFormat);
+    }, [roomId]);
+
     useEffect(() => {
         if (editorRef.current) editorRef.current.layout();
     }, [isFullScreen, isSettingOpen]);
@@ -55,7 +58,6 @@ export const EditorComp = () => {
         return () => clearTimeout(timer);
     }, [languageChoosed, code]);
 
-
     useEffect(() => {
         socketRef.current = io('https://codeeditorbackend-pp93.onrender.com', {
             withCredentials: true,
@@ -64,14 +66,11 @@ export const EditorComp = () => {
 
         socketRef.current.on('connect', () => {
             const username = sessionStorage.getItem('user_name') || 'Anonymous';
-            console.log(username);
             socketRef.current.emit('join-room', { roomId, username });
         });
 
         socketRef.current.on('init-user-status', ({ isFirstUser, currentCode }) => {
-            if (isFirstUser && currentCode) {
-                setCode(currentCode);
-            }
+            if (isFirstUser && currentCode) setCode(currentCode);
         });
 
         socketRef.current.on('initial-code', (initialCode) => {
@@ -82,7 +81,6 @@ export const EditorComp = () => {
 
         socketRef.current.on('user-list', (userList) => {
             setUsers(userList);
-            console.log('User List', userList);
             setUserColors(prev => {
                 const updated = { ...prev };
                 userList.forEach(user => {
@@ -101,7 +99,6 @@ export const EditorComp = () => {
             if (newCode === currentCode) return;
 
             isRemoteUpdate.current = true;
-
             const position = editor.getPosition();
             const selection = editor.getSelection();
 
@@ -133,7 +130,6 @@ export const EditorComp = () => {
         return () => socketRef.current.disconnect();
     }, [roomId]);
 
-    // Remote cursor render
     useEffect(() => {
         if (!editorRef.current) return;
         const editor = editorRef.current;
@@ -152,7 +148,6 @@ export const EditorComp = () => {
         remoteCursorDecorationIds.current = editor.deltaDecorations(remoteCursorDecorationIds.current, decorations);
     }, [remoteCursors]);
 
-    // Remote selection render
     useEffect(() => {
         if (!editorRef.current || !remoteSelection) return;
         editorRef.current.deltaDecorations([], [
@@ -210,37 +205,45 @@ export const EditorComp = () => {
 
     return (
         <div className='editor-main-div' style={{ width: '100%', display: 'flex' }}>
-            <div
-                ref={containerRef}
-                style={{
-                    height: isFullScreen ? '100vh' : 'auto',
-                    width: isSettingOpen ? '82vw' : '100%',
-                    transition: 'width 0.5s ease',
-                    border: '1px solid var(--logo-color)',
-                    overflow: 'hidden',
-                }}
-            >
-                <Editor
-                    height={isFullScreen ? '100vh' : '88vh'}
-                    width='100%'
-                    language={languageChoosed.language}
-                    value={code}
-                    onChange={handleEditorChange}
-                    onMount={handleEditorMount}
-                    theme={themeCoosed}
-                    options={{
-                        fontSize: fontSize,
-                        wordWrap: 'on',
-                        minimap: { enabled: miniMap },
-                        suggest: { enabled: true },
-                        formatOnType: true,
-                        scrollBeyondLastLine: false,
-                        quickSuggestions: false,
-                        suggestOnTriggerCharacters: true,
-                    }}
-                />
-            </div>
-            <AsideBar />
+            {roomValid === false ? (
+                <Navigate to="/404" replace />
+            ) : roomValid === null ? (
+                <div style={{ margin: 'auto', fontSize: '1.5rem' }}>Loading...</div>
+            ) : (
+                <>
+                    <div
+                        ref={containerRef}
+                        style={{
+                            height: isFullScreen ? '100vh' : 'auto',
+                            width: isSettingOpen ? '82vw' : '100%',
+                            transition: 'width 0.5s ease',
+                            border: '1px solid var(--logo-color)',
+                            overflow: 'hidden',
+                        }}
+                    >
+                        <Editor
+                            height={isFullScreen ? '100vh' : '88vh'}
+                            width='100%'
+                            language={languageChoosed.language}
+                            value={code}
+                            onChange={handleEditorChange}
+                            onMount={handleEditorMount}
+                            theme={themeCoosed}
+                            options={{
+                                fontSize: fontSize,
+                                wordWrap: 'on',
+                                minimap: { enabled: miniMap },
+                                suggest: { enabled: true },
+                                formatOnType: true,
+                                scrollBeyondLastLine: false,
+                                quickSuggestions: false,
+                                suggestOnTriggerCharacters: true,
+                            }}
+                        />
+                    </div>
+                    <AsideBar />
+                </>
+            )}
         </div>
     );
 };
