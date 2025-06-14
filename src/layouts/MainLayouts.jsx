@@ -6,6 +6,7 @@ import LandingPage from "../pages/Landing/LandingPage";
 import {EditorComp} from '../pages/Editor/Editor'
 import ProtectedRoutes from "../Routes/ProtectedRoutes";
 import PageNotFound from '../pages/PageNotFound/PageNotFound'
+import FeatureBarWithIcons from "../NEWTHEME/Features/FeaturesBar";
 import FeatureSectionWithVideo from "../NEWTHEME/FeatureSectionWithVideo/FeatureSectionWithVideo";
 
 export const MainLayout = () => {
