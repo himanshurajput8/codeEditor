@@ -28,8 +28,8 @@ const Homepage2 = () => {
 
   const handleDemo = () => {
     console.log(document.body);
-
   }
+  
   return (
     <>
       <div className="hero-container" id='headerId-Div'>
@@ -58,10 +58,8 @@ const Homepage2 = () => {
           ></video>
         </div>
       </div>
-
-      {/* HERO SECTION COMPLETED */}
       <ButtonGroup onShareClick={onShareClick} onBookDemo={handleDemo} />
-      {showLoginModal && <LoginModal/>}
+      {showLoginModal && <LoginModal />}
     </>
   );
 };
