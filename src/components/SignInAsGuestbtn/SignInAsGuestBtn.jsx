@@ -2,10 +2,11 @@ import { useContext } from "react";
 import { AuthContext } from "../../ContextAPI/AuthUser";
 import LoginModal from "../LoginModal/LoginModal";
 import { LoginModalContext } from "../../ContextAPI/LoginModalContext";
+import { useNavigate } from "react-router-dom";
 
 export default function SignInAsGuestBtn() {
   const { showLoginModal, setShowLoginModal } = useContext(LoginModalContext);
-  
+  const navigate = useNavigate();
   const {
     isAuthPage,
     setShowisAuthPage,
@@ -15,8 +16,9 @@ export default function SignInAsGuestBtn() {
   } = useContext(AuthContext);
 
   const handleAuthPage = () => {
-    setShowisAuthPage(true);
-    setShowLoginModal(true);
+    navigate('/signUp')
+    // setShowisAuthPage(true);
+    // setShowLoginModal(true);
   };
 
   if (showLoginModal) return <LoginModal />;

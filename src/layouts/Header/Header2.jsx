@@ -9,6 +9,10 @@ import { AuthContext } from '../../ContextAPI/AuthUser';
 import logoutUser from '../../components/Supabase/supabaseLogout';
 import { GifContext } from '../../ContextAPI/GifContext';
 import ToggleThemes from '../../components/ToggleThemes/ToggleThemes';
+import { X } from 'lucide-react';
+import getStarted from '../../Utils/getStarted';
+import { LoginModalContext } from '../../ContextAPI/LoginModalContext';
+
 
 export const Header2 = () => {
   const [showDropDown, setShowDropDown] = useState(false);
@@ -23,9 +27,10 @@ export const Header2 = () => {
   const { showGif, setShowGif } = useContext(GifContext);
   const gifTimeoutRef = useRef(null);
   const dropdownRef = useRef(null);
-
   const currentPath = location.pathname.replace("/", "");
   const isInsideEditor = location.pathname.startsWith('/editor/');
+  const { showLoginModal, setShowLoginModal } = useContext(LoginModalContext);
+
   const navItems = [
     { id: "home", label: "Home", route: '' },
     { id: "features", label: "Features", route: 'features' },
@@ -71,6 +76,16 @@ export const Header2 = () => {
     return () => clearTimeout(gifTimeoutRef.current);
   }, [showGif]);
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+    // Optional: Cleanup on unmount
+    return () => document.body.classList.remove("no-scroll");
+  }, [isMobileMenuOpen]);
+
   return (
     <>
       <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
@@ -86,9 +101,15 @@ export const Header2 = () => {
 
           {/* Hamburger icon */}
           <div className="hamburger" onClick={toggleMobileMenu}>
-            <span />
-            <span />
-            <span />
+            {isMobileMenuOpen ? (
+              <X size={30} color="var(--logo-color)" />
+            ) : (
+              <>
+                <span />
+                <span />
+                <span />
+              </>
+            )}
           </div>
 
           {/* Navigation Menu */}
@@ -117,31 +138,56 @@ export const Header2 = () => {
                   Sessions
                 </li>
               )}
+              {isMobileMenuOpen && <li>Start Collaborating</li>}
+              {isMobileMenuOpen && !isUserLogged && <li
+                onClick={
+                  () => { 
+                    setIsMobileMenuOpen(false);
+                    navigate('/signUp');
+                  }}
+              >Sign In</li>}
+              {isUserLogged &&
+                isMobileMenuOpen &&
+                <>
+                  <li>{(AuthUserData?.user_metadata?.name || userName)}</li>
+                  <li onClick={()=>{
+                    logoutUser();
+                    setIsMobileMenuOpen(false);
+                  }}>Logout</li>
+                </>
+              }
             </ul>
+            {isMobileMenuOpen && <ToggleThemes />}
           </nav>
 
           {/* Authenticated User Section */}
           {isUserLogged ? (
             <div className="header-userName-dropDown" ref={dropdownRef}>
-              <p>
-                {(AuthUserData?.user_metadata?.name?.trim().split(' ')[0] || userName)?.toUpperCase()}
-              </p>
-              <img
-                src={AuthUserData?.user_metadata?.avatar_url || AuthUserData?.user_metadata?.picture || "/default-avatar.png"}
-                alt="ImgUser"
-                className="header-user-avatar"
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: "50%",
-                  marginRight: 8,
-                  cursor: 'pointer'
-                }}
-                onClick={toggleDropDown}
-              />
+              {window.innerWidth > 768 && (
+                <p>{(AuthUserData?.user_metadata?.name?.split(' ')[0] || userName)?.toUpperCase()}</p>
+              )}
+              {
+                window.innerWidth > 768 &&
+                <img
+                  src={AuthUserData?.user_metadata?.avatar_url || AuthUserData?.user_metadata?.picture || "/default-avatar.png"}
+                  alt="ImgUser"
+                  className="header-user-avatar"
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: "50%",
+                    marginRight: 8,
+                    cursor: 'pointer'
+                  }}
+                  onClick={toggleDropDown}
+                />
+              }
               {showDropDown && (
                 <div className="dropdown">
-                  <p onClick={logoutUser}>Logout</p>
+                  <p onClick={()=>{
+                    logoutUser();
+                    
+                  }}>Logout</p>
                   <ToggleThemes />
                 </div>
               )}
@@ -151,7 +197,6 @@ export const Header2 = () => {
           )}
         </div>
       </header>
-
       <div style={{ height: "12vh" }} id='home' />
       {isInsideEditor && isUserLogged && <RecordingNavIconsHeader />}
     </>

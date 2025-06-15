@@ -80,3 +80,15 @@ body {
   border-radius: 20px;
   display: block;
 }
+
+
+@media(max-width:768px){
+  .custom-hero-left {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    max-width: 500px;
+    align-items: center;
+    justify-content: center;
+}
+}

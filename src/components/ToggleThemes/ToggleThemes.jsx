@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { ToggleUiThemeContext } from '../../ContextAPI/ToggleUITheme';
 import { Sun, Moon, TreePine, Cpu, PaintBucket, Flower } from 'lucide-react';
+import './ToggleThemes.css'
 
 const themeIconMap = {
   default: { icon: PaintBucket, color: '#60b54b' },
@@ -34,20 +35,10 @@ export default function ThemeToggleButton() {
   return (
     <button
       onClick={toggleTheme}
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '8px',
-        background: 'transparent',
-        border: '1px solid #ccc',
-        padding: '6px 12px',
-        borderRadius: '8px',
-        cursor: 'pointer',
-        color,
-      }}
+      className='toggle-theme-btn'
     >
+      {activeTheme.charAt(0).toUpperCase() + activeTheme.slice(1)}
       {Icon && <Icon size={20} color={color} />}
-      {activeTheme}
     </button>
   );
 }

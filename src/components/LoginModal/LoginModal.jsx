@@ -71,7 +71,7 @@ export default function LoginModal() {
         <>
             <div className="modal-wrapper">
                 <div className="modal-left">
-                    <img className="modal-logo" src="/logoGreen.png" alt="Logo" />
+                    <img className="modal-logo" src="/unscreen.gif" alt="Logo" />
 
                     <h1 className="modal-title">Sign up for CodeTogether</h1>
                     <p className="modal-subtitle">Get started with $300 free monthly !</p>
@@ -114,11 +114,11 @@ export default function LoginModal() {
                 <div className="modal-right">
                     <img src="/LoginModalRightImg.webp" alt="Code Graphic" />
                 </div>
-                <button className="cancel-btn close-modal"
+                {/* <button className="cancel-btn close-modal"
                     onClick={handleLoginModalToFalse}
                 >
                  Close   
-                </button>
+                </button> */}
             </div>
         </>
     );

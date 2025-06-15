@@ -8,6 +8,7 @@ import ProtectedRoutes from "../Routes/ProtectedRoutes";
 import PageNotFound from '../pages/PageNotFound/PageNotFound'
 import FeatureBarWithIcons from "../NEWTHEME/Features/FeaturesBar";
 import FeatureSectionWithVideo from "../NEWTHEME/FeatureSectionWithVideo/FeatureSectionWithVideo";
+import LoginModal from "../components/LoginModal/LoginModal";
 
 export const MainLayout = () => {
 
@@ -20,6 +21,8 @@ export const MainLayout = () => {
                 <Route path="/auth/callback" element={<AuthCallback />} />
 
                 <Route path="/home" element={<LandingPage />}/>
+                                
+                <Route path="/signUp" element={<LoginModal />}/>
 
                 {/* <Route path='/editor/:id' element={<EditorComp />}/> */}
                 <Route path='/editor/:id' element={
