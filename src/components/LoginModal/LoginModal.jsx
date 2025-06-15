@@ -114,11 +114,11 @@ export default function LoginModal() {
                 <div className="modal-right">
                     <img src="/LoginModalRightImg.webp" alt="Code Graphic" />
                 </div>
-                <button className="cancel-btn close-modal"
+                {/* <button className="cancel-btn close-modal"
                     onClick={handleLoginModalToFalse}
                 >
                  Close   
-                </button>
+                </button> */}
             </div>
         </>
     );

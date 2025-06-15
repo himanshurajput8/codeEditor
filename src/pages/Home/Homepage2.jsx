@@ -22,7 +22,8 @@ const Homepage2 = () => {
       navigate(`/editor/${id}`);
     }
     else {
-      setShowLoginModal(true)
+      navigate('/signUp')
+      // setShowLoginModal(true);
     }
   };
 

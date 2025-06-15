@@ -16,8 +16,9 @@ export default function SignInAsGuestBtn() {
   } = useContext(AuthContext);
 
   const handleAuthPage = () => {
-    setShowisAuthPage(true);
-    setShowLoginModal(true);
+    navigate('/signUp')
+    // setShowisAuthPage(true);
+    // setShowLoginModal(true);
   };
 
   if (showLoginModal) return <LoginModal />;

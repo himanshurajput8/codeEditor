@@ -30,12 +30,6 @@ html {
   --lemon-loght:  #F5FFCB;
 }
 
-/* [data-theme=""] {
-  --logo-color: #DCFF51;
-  --main-white:   #F5FFCB;
-  --bg-color: #fffbe6;
-} */
-
 [data-theme="cyberpunk"] {
   --logo-color: #ff007c;
   --main-white: #f5f5f5;
@@ -58,8 +52,6 @@ html {
   --logo-color: #DCFF51;
   --main-white:   #F5FFCB;
   --bg-color: #fffbe6;
-  /* --main-white: #268bd2; */
-  /* --main-white: #fdf6e3; */
   --light-grey: #eee8d5;
   --dull-green: #93a1a1;
   --lemon-color: #b58900;

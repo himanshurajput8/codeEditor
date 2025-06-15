@@ -142,14 +142,18 @@ export const Header2 = () => {
               {isMobileMenuOpen && !isUserLogged && <li
                 onClick={
                   () => { 
-                    navigate('/signUp')
+                    setIsMobileMenuOpen(false);
+                    navigate('/signUp');
                   }}
               >Sign In</li>}
               {isUserLogged &&
                 isMobileMenuOpen &&
                 <>
                   <li>{(AuthUserData?.user_metadata?.name || userName)}</li>
-                  <li onClick={logoutUser}>Logout</li>
+                  <li onClick={()=>{
+                    logoutUser();
+                    setIsMobileMenuOpen(false);
+                  }}>Logout</li>
                 </>
               }
             </ul>
@@ -180,7 +184,10 @@ export const Header2 = () => {
               }
               {showDropDown && (
                 <div className="dropdown">
-                  <p onClick={logoutUser}>Logout</p>
+                  <p onClick={()=>{
+                    logoutUser();
+                    
+                  }}>Logout</p>
                   <ToggleThemes />
                 </div>
               )}

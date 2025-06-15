@@ -325,15 +325,22 @@ body {
     padding: 0px;
   }
 
-    .no-scroll {
-  overflow: hidden !important;
-  position: fixed !important;
-  width: 100%;
-  height: 100%;
-}
+  .no-scroll {
+    overflow: hidden !important;
+    position: fixed !important;
+    width: 100%;
+    height: 100%;
+  }
 
-  .guest-signin{
+  .guest-signin {
     display: none;
   }
-}
 
+  .no-record-by-rrweb {
+    position: fixed;
+    padding: 1.96vw;
+    z-index: 1000;
+    right: 40vw !important;
+    top: 2vh !important;
+  }
+}
