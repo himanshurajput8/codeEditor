@@ -26,6 +26,7 @@ body {
   align-items: center;
   max-width: 90%;
   margin: 0 auto;
+  backdrop-filter: blur(16px);
 }
 
 /* Logo styling */

@@ -1,9 +1,7 @@
 import './Homepage2.css'
 import { useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from 'uuid';
-import { NavContext } from "../../ContextAPI/NavBarContext";
-import { useContext, useState } from "react";
-import { nanoid ,customAlphabet} from "nanoid";
+import { useContext} from "react";
+import {customAlphabet} from "nanoid";
 import { AuthContext } from "../../ContextAPI/AuthUser";
 import LoginModal from "../../components/LoginModal/LoginModal";
 import { LoginModalContext } from '../../ContextAPI/LoginModalContext'

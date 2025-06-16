@@ -14,7 +14,6 @@ export default function LandingPage() {
             <VideoSection />
             <FeatureSectionWithVideo />
             <CodeLanguages />
-            <Footer />
         </>
     )
 }

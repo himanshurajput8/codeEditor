@@ -11,7 +11,6 @@ import {
   FolderOpenIcon
 } from '@heroicons/react/24/outline';
 
-
 const features = [
   {
     icon: <CodeBracketIcon className="h-8 w-8 text-green-400" />,
