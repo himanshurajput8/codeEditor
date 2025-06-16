@@ -6,6 +6,7 @@ import RrwebPlayerComponent from '../../components/Player/RrwebPlayer';
 import { v4 as uuidv4 } from 'uuid';
 import { TrashIcon, ShareIcon } from '@heroicons/react/24/outline';
 import DotLoading from '../../components/DotLoading/DotLoading'
+import ShareSessionModal from '../../components/ShareSessionModal/ShareSessionModal';
 
 export default function Sessions() {
   const [recordingData, setRecordingData] = useState([]);
@@ -13,6 +14,9 @@ export default function Sessions() {
   const [showRecording, setShowRecording] = useState(false);
   const [selectedEvents, setSelectedEvents] = useState([]);
   const { AuthUserData } = useContext(AuthContext);
+  const [shareUrl, setShareUrl] = useState('');
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+
 
   const userId = AuthUserData?.id;
 
@@ -51,6 +55,7 @@ export default function Sessions() {
     }
   };
 
+
   const handleShare = async (recordingId) => {
     const shareToken = uuidv4();
 
@@ -64,10 +69,15 @@ export default function Sessions() {
       console.error('Error generating share token:', error.message);
     } else {
       const shareURL = `${window.location.origin}/shared/${shareToken}`;
-      navigator.clipboard.writeText(shareURL);
-      alert('Shareable link copied to clipboard:\n' + shareURL);
+      setShareUrl(shareURL);
+      setIsShareModalOpen(true);
     }
   };
+
+
+
+
+
 
   const ShowSingleRecording = (recEvent) => {
     setSelectedEvents(recEvent);
@@ -77,60 +87,69 @@ export default function Sessions() {
   return showRecording ? (
     <RrwebPlayerComponent events={selectedEvents} />
   ) : (
-    <div className="sessions-container">
-      <div className='redording-heading'><h2 className="sessions-title"> <span className='light-green-span'> Your Recording </span> <span className='dark-green-span'> Sessions</span></h2></div>
+    <>
 
-      {loading ? (
-        <DotLoading />
-      ) : recordingData.length === 0 ? (
-        <p className="no-recordings-text">No recordings found.</p>
-      ) : (
+      <div className="sessions-container">
+        <div className='redording-heading'><h2 className="sessions-title"> <span className='light-green-span'> Your Recording </span> <span className='dark-green-span'> Sessions</span></h2></div>
 
-        <div className="recordings-list">
-          {recordingData.map((rec, index) => (
-            <div key={rec.recording_id} className="recording-card" onClick={() => ShowSingleRecording(rec.events)}>
-              <div className='single-session-left'>
-                <img
-                  src={rec.screenshot}
-                  alt="Recording Screenshot"
-                  className="recording-screenshot"
-                />
+        {loading ? (
+          <DotLoading />
+        ) : recordingData.length === 0 ? (
+          <p className="no-recordings-text">No recordings found.</p>
+        ) : (
+
+          <div className="recordings-list">
+            {recordingData.map((rec, index) => (
+              <div key={rec.recording_id} className="recording-card" onClick={() => ShowSingleRecording(rec.events)}>
+                <div className='single-session-left'>
+                  <img
+                    src={rec.screenshot}
+                    alt="Recording Screenshot"
+                    className="recording-screenshot"
+                  />
+                </div>
+                <div className='single-session-right'>
+                  <div className="recording-info">
+                    <p className='dull-green-color'> {new Date(rec.created_at).toLocaleDateString()}</p>
+                    <p className='dull-green-color'> {new Date(rec.created_at).toLocaleTimeString()}</p>
+                  </div>
+                  <div className='document-name-div'>
+                    {<h1 className='light-green-color'>{rec.name ? (rec.name) : (`Untitled Document ${index + 1}`)}</h1>}
+                  </div>
+                  <div className='recording-card-btn-div'>
+                    <button
+                      className="outline-button2"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDelete(rec.recording_id);
+                      }}
+                    >
+                      Delete
+                    </button>
+
+                    <button
+                      className="outline-button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleShare(rec.recording_id);
+                      }}
+                    >
+                      Share
+                    </button>
+                  </div>
+                </div>
               </div>
-              <div className='single-session-right'>
-                <div className="recording-info">
-                  <p className='dull-green-color'> {new Date(rec.created_at).toLocaleDateString()}</p>
-                  <p className='dull-green-color'> {new Date(rec.created_at).toLocaleTimeString()}</p>
-                </div>
-                <div className='document-name-div'>
-                  {<h1 className='light-green-color'>{rec.name ? (rec.name) : (`Untitled Document ${index + 1}`)}</h1>}
-                </div>
-                <div className='recording-card-btn-div'>
-                  <button
-                    className="outline-button2"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDelete(rec.recording_id);
-                    }}
-                  >
-                    Delete
-                  </button>
 
-                  <button
-                    className="outline-button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleShare(rec.recording_id);
-                    }}
-                  >
-                    Share
-                  </button>
-                </div>
-              </div>
-            </div>
-
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
+      </div>
+      {isShareModalOpen && (
+        <ShareSessionModal
+          roomUrl={shareUrl}
+          onClose={() => setIsShareModalOpen(false)}
+        />
       )}
-    </div>
+    </>
   );
 }

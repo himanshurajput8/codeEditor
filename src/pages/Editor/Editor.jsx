@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { io } from 'socket.io-client';
 import Editor from '@monaco-editor/react';
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams, Navigate, useLocation } from 'react-router-dom';
 import AsideBar from '../../layouts/AsideBAr/AsideBar';
 import { FullScreenContext } from '../../ContextAPI/ToggleFullScreenContext';
 import { ThemeContext } from '../../ContextAPI/ThemeContext';
 import { LanguageContext } from '../../ContextAPI/LanguageContext';
-
+import { supabase } from '../../components/Supabase/SupabaseClient'
 const generateColorForUser = (id) => {
     const colors = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff'];
     const hash = [...id].reduce((acc, char) => acc + char.charCodeAt(0), 0);
@@ -29,11 +29,43 @@ export const EditorComp = () => {
     const { isFullScreen, fontSize, miniMap, isSettingOpen } = useContext(FullScreenContext);
     const { themeCoosed } = useContext(ThemeContext);
     const { languageChoosed } = useContext(LanguageContext);
+    const location = useLocation();
+    const joinedViaURL = !location.state?.createdByHost;
 
     useEffect(() => {
+        if (!joinedViaURL) { //agar Host hai to check karne ki jarurat nahi hai
+            setRoomValid(true);
+            return
+        }
+
+        //agar url ka format galt hai tab bhi 404 par return kardo 
         const isValidFormat = /^[A-Za-z0-9]{12}$/.test(roomId);
-        setRoomValid(isValidFormat);
-    }, [roomId]);
+        if (!isValidFormat) {
+            console.log('In Room valid Condition');
+
+            setRoomValid(false);
+            return;
+        }
+
+        //supabase me bhi check karo ki room hai bhi ya nahi
+        const ValidateRoomFromSupabase = async () => {
+            const { data, error } = await supabase
+                .from('session_room')
+                .select('room_id')  // include the column you're filtering on
+                .eq('room_id', roomId)
+                .single();
+
+            if (error || !data) {
+                setRoomValid(false);
+            } else {
+                setRoomValid(true);
+            }
+        }
+        ValidateRoomFromSupabase();
+    }, [roomId])
+
+
+
 
     useEffect(() => {
         if (editorRef.current) editorRef.current.layout();

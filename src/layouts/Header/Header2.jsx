@@ -34,7 +34,8 @@ export const Header2 = () => {
   const navItems = [
     { id: "home", label: "Home", route: '' },
     { id: "features", label: "Features", route: 'features' },
-    { id: "contact", label: "Contact Us", route: 'contact' },
+    // { id: "contact", label: "Contact Us", route: 'contact' },
+    { id: 'working', label: "How it Works", route: 'working'}
   ];
 
   const handleGoToHome = () => {

@@ -1,45 +1,57 @@
-import './Homepage2.css'
+import './Homepage2.css';
 import { useNavigate } from "react-router-dom";
-import { useContext} from "react";
-import {customAlphabet} from "nanoid";
+import { useContext } from "react";
+import { customAlphabet } from "nanoid";
 import { AuthContext } from "../../ContextAPI/AuthUser";
 import LoginModal from "../../components/LoginModal/LoginModal";
-import { LoginModalContext } from '../../ContextAPI/LoginModalContext'
+import { LoginModalContext } from '../../ContextAPI/LoginModalContext';
 import ButtonGroup from "../../NEWTHEME/ButtonGroup/ButtonGroup";
+import { supabase } from '../../components/Supabase/SupabaseClient';
 
 const Homepage2 = () => {
   const navigate = useNavigate();
-  const { isUserLogged } = useContext(AuthContext);
+  const { isUserLogged, AuthUserData } = useContext(AuthContext); // ✅ Get user.id here
   const { showLoginModal, setShowLoginModal } = useContext(LoginModalContext);
 
-  const onShareClick = () => {
+  const onShareClick = async () => {
     if (isUserLogged) {
       const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      const nanoid = customAlphabet(alphabet,12);
+      const nanoid = customAlphabet(alphabet, 12);
       const id = nanoid();
-      navigate(`/editor/${id}`);
-    }
-    else {
-      navigate('/signUp')
-      // setShowLoginModal(true);
+      
+      const { data, error } = await supabase.from('session_room').insert([
+        {
+          room_id: id,
+          host_id: AuthUserData.id,
+          is_private: true,
+        }
+      ]);
+
+      if (error) {
+        console.error("Error creating room:", error);
+        alert("Something went wrong. Please try again.");
+        return;
+      }
+
+      navigate(`/editor/${id}`, {state:{ createdByHost:true}});
+    } else {
+      navigate('/signUp');
+      // Or open modal: setShowLoginModal(true);
     }
   };
 
   const handleDemo = () => {
     console.log(document.body);
-  }
-  
+  };
+
   return (
     <>
       <div className="hero-container" id='headerId-Div'>
         <div className="hero-container-left">
-
-          <h1 className="hero-title" >
-            Where <span>Interviewers</span> 
-            <br/>
-            and <span>Developers
-            <br/>  
-            </span> Meet to <span>Code</span>
+          <h1 className="hero-title">
+            Where <span>Interviewers</span> <br />
+            and <span>Developers</span><br />
+            Meet to <span>Code</span>
             <span>⚡</span>
           </h1>
           <p className="hero-subtext">
@@ -64,4 +76,3 @@ const Homepage2 = () => {
 };
 
 export default Homepage2;
-
