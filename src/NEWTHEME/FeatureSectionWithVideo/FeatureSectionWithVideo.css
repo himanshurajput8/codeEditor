@@ -131,6 +131,9 @@
   letter-spacing: 0.05em;
 }
 
+.feature-layout{
+  width: 100vw;
+}
 
 @media (max-width:768px) {
   .feature-layout{
@@ -146,5 +149,22 @@
     width: 300%;
     right: -100vw;
     top: -15vh;
+  }
+
+  .feature-left{
+    width: 100%;
+    border: 1px solid green;
+  }
+
+  .feature-card{
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+    text-align: justify;
+    letter-spacing: 2px;
+    width: 100%;
+    border: 1px solid green;
+    max-width:100vw;
+    min-width: 90vw;
   }
 }

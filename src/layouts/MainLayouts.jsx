@@ -9,6 +9,7 @@ import PageNotFound from '../pages/PageNotFound/PageNotFound'
 import FeatureBarWithIcons from "../NEWTHEME/Features/FeaturesBar";
 import FeatureSectionWithVideo from "../NEWTHEME/FeatureSectionWithVideo/FeatureSectionWithVideo";
 import LoginModal from "../components/LoginModal/LoginModal";
+import Footer from "../pages/Footer/Footer";
 
 export const MainLayout = () => {
 
@@ -46,6 +47,8 @@ export const MainLayout = () => {
                 <Route path="*" element={<PageNotFound />} />
 
             </Routes>
+
+            <Footer/>
         </>
     )
 }
