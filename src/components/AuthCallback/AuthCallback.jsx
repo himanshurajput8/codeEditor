@@ -11,8 +11,9 @@ const AuthCallback = () => {
       if (error) {
         console.error('Auth error:', error);
       } else if (data.session) {
+        const redirected_path = localStorage.getItem('redirected_Path' || "/");
         console.log('Signed in!');
-        navigate('/'); // 👈 Go to homepage
+        navigate(redirected_path); // 👈 Go to homepage
       }
     });
   }, [navigate]);

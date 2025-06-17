@@ -5,27 +5,36 @@ import { AuthContext } from '../../ContextAPI/AuthUser';
 import { log } from 'socket.io-client/dist/socket.io.js';
 import { LoginModalContext } from '../../ContextAPI/LoginModalContext';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-
+import { useLocation } from 'react-router-dom';
 
 export default function LoginModal() {
     const redirectTo = window.location.origin + '/auth/callback';
     const { setShowLoginModal } = useContext(LoginModalContext);
     const { setAuthUserData } = useContext(AuthContext);
-    
+    const location = useLocation();
+
+    useEffect(() => {
+        if(location?.state?.from?.pathname){
+            const redirectedPath = location?.state?.from?.pathname || '/';
+            localStorage.setItem('redirected_Path', redirectedPath);
+        }
+    }, []);
+
+
     const handleGoogleAuthentication = async () => {
-    try {
-        const { data, error } = await supabase.auth.signInWithOAuth({
-            provider: 'google',
-            options: {
-                redirectTo,
-            },
-        });
-        console.log("Google Auth Response:", data);
-        if (error) throw error;
-    } catch (err) {
-        console.error("Google Auth Error:", err.message);
-    }
-};
+        try {
+            const { data, error } = await supabase.auth.signInWithOAuth({
+                provider: 'google',
+                options: {
+                    redirectTo,
+                },
+            });
+            console.log("Google Auth Response:", data);
+            if (error) throw error;
+        } catch (err) {
+            console.error("Google Auth Error:", err.message);
+        }
+    };
 
 
     const handleGithubAuthentication = async () => {
@@ -34,7 +43,7 @@ export default function LoginModal() {
             const { data, error } = await supabase.auth.signInWithOAuth({
                 provider: 'github',
                 options: {
-                    redirectTo 
+                    redirectTo
                 }
             });
             console.log("Github Auth Response:", data);

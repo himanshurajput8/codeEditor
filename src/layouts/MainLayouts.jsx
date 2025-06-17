@@ -14,9 +14,10 @@ import ValidateRoom from "../components/ValidateRoom/ValidateRoom";
 
 export const MainLayout = () => {
   const location = useLocation();
-
-  // Check if path starts with /editor/
-  const hideFooter = location.pathname.startsWith("/editor/");
+  const hideFooter =
+  location.pathname.startsWith("/editor/") ||
+  location.pathname.startsWith("/signUp") ||
+  location.pathname.startsWith("/session"); 
 
   return (
     <>

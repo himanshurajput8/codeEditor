@@ -1,5 +1,5 @@
 import './Homepage2.css';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { customAlphabet } from "nanoid";
 import { AuthContext } from "../../ContextAPI/AuthUser";
@@ -23,7 +23,7 @@ const Homepage2 = () => {
         {
           room_id: id,
           host_id: AuthUserData.id,
-          is_private: true,
+          is_private: false,
         }
       ]);
 

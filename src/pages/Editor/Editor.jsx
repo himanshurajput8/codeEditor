@@ -42,7 +42,6 @@ export const EditorComp = () => {
         const isValidFormat = /^[A-Za-z0-9]{12}$/.test(roomId);
         if (!isValidFormat) {
             console.log('In Room valid Condition');
-
             setRoomValid(false);
             return;
         }
