@@ -13,12 +13,12 @@ export default function LoginModal() {
     const { setAuthUserData } = useContext(AuthContext);
     const location = useLocation();
 
-    useEffect(() => {
-        if(location?.state?.from?.pathname){
-            const redirectedPath = location?.state?.from?.pathname || '/';
-            localStorage.setItem('redirected_Path', redirectedPath);
-        }
-    }, []);
+    // useEffect(() => {
+    //     if(location?.state?.from?.pathname){
+    //         const redirectedPath = location?.state?.from?.pathname || '/';
+    //         localStorage.setItem('redirected_Path', redirectedPath);
+    //     }
+    // }, []);
 
 
     const handleGoogleAuthentication = async () => {

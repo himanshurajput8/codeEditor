@@ -70,7 +70,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="footer-column">
+          {/* <div className="footer-column">
             <h4>Company</h4>
             <ul>
               <li>About</li>
@@ -79,7 +79,7 @@ const Footer = () => {
               <li>Privacy Policy</li>
               <li>Blog</li>
             </ul>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="footer-bottom">

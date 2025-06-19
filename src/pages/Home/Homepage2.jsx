@@ -7,6 +7,8 @@ import LoginModal from "../../components/LoginModal/LoginModal";
 import { LoginModalContext } from '../../ContextAPI/LoginModalContext';
 import ButtonGroup from "../../NEWTHEME/ButtonGroup/ButtonGroup";
 import { supabase } from '../../components/Supabase/SupabaseClient';
+import mixpanel from '../../mixpanel';
+
 
 const Homepage2 = () => {
   const navigate = useNavigate();
@@ -14,11 +16,16 @@ const Homepage2 = () => {
   const { showLoginModal, setShowLoginModal } = useContext(LoginModalContext);
 
   const onShareClick = async () => {
+    mixpanel.track("Get Started Clicked", {
+      source: "Homepage",
+      timestamp: new Date().toISOString()
+    });
+
     if (isUserLogged) {
       const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
       const nanoid = customAlphabet(alphabet, 12);
       const id = nanoid();
-      
+
       const { data, error } = await supabase.from('session_room').insert([
         {
           room_id: id,
@@ -33,7 +40,7 @@ const Homepage2 = () => {
         return;
       }
 
-      navigate(`/editor/${id}`, {state:{ createdByHost:true}});
+      navigate(`/editor/${id}`, { state: { createdByHost: true } });
     } else {
       navigate('/signUp');
       // Or open modal: setShowLoginModal(true);

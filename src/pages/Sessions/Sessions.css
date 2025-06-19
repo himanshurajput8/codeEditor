@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
+.no-recordings-text{
+  color: var(--main-white);
+  font-size: 31px;
+  line-height: 2;
+  letter-spacing: 0.304rem;
+  font-style: italic;
+  font-weight: 210;
+  font-variation-settings: "opsz" 32;
+}
+
 .recording-card {
   display: flex;
   flex-direction: row;
@@ -234,6 +244,7 @@
   background-color: var(--main-white);
   border-color: rgba(212, 247, 197, 0.6);
 }
+
 
 
 @media (max-width:768px) {
