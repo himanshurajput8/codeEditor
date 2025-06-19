@@ -2,23 +2,26 @@ import { useContext } from "react";
 import { AuthContext } from "../../ContextAPI/AuthUser";
 import LoginModal from "../LoginModal/LoginModal";
 import { LoginModalContext } from "../../ContextAPI/LoginModalContext";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import trackEvents from "../../Utils/mixPanelTrackEvents";
 
 export default function SignInAsGuestBtn() {
   const { showLoginModal, setShowLoginModal } = useContext(LoginModalContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  
   const {
     isAuthPage,
-    setShowisAuthPage,
     isUserLogged,
     AuthUserData,
     isAuthLoading
   } = useContext(AuthContext);
 
   const handleAuthPage = () => {
+    trackEvents('Sign Up btn',{
+      location: location.pathname    
+    });
     navigate('/signUp')
-    // setShowisAuthPage(true);
-    // setShowLoginModal(true);
   };
 
   if (showLoginModal) return <LoginModal />;

@@ -1,4 +1,5 @@
 .footer {
+  margin-top: 10vh;
   color: #ccc;
   padding: 4rem 2rem;
   font-family: 'Inter', sans-serif;
@@ -33,16 +34,27 @@
   font-size: 0.9rem;
   cursor: pointer;
   color: var(--main-white);
+  transition: color 0.2s ease-in-out;
 }
 
-.intro h3 {
+.footer-column li:hover {
+  color: var(--logo-color);
+}
+
+.intro {
+  flex: 1 1 100%;
+  margin-bottom: 2rem;
+}
+
+.footer-column.intro h3 {
   font-size: 1.2rem;
-  color: #fff;
+  color: var(--logo-color);
 }
 
-.intro p {
+.footer-column.intro p {
   font-size: 0.95rem;
   margin: 0.5rem 0 1.5rem;
+  color: var(--main-white);
 }
 
 .footer-btn {
@@ -59,13 +71,18 @@
   transition: all 0.2s ease-in-out;
 }
 
+.footer-btn:hover {
+  background-color: var(--logo-color);
+  color: #000;
+}
+
 .footer-btn.dark {
   background-color: #111;
   color: #fff;
   border: none;
 }
 
-.footer-btn:hover {
+.footer-btn.dark:hover {
   background-color: var(--logo-color);
   color: #000;
 }
@@ -78,19 +95,15 @@
   border-top: 1px solid #222;
   padding-top: 1.5rem;
   font-size: 0.85rem;
-}
-
-.footer-icons svg {
-  margin-left: 1rem;
-  font-size: 1.2rem;
   color: var(--main-white);
-  cursor: pointer;
 }
 
-.footer-icons svg:hover {
-  color: #00ffa3;
+.footer-icons {
+  display: flex;
+  align-items: center;
 }
 
+.footer-icons svg,
 .icon {
   width: 24px;
   height: 24px;
@@ -100,43 +113,19 @@
   transition: color 0.2s ease-in-out;
 }
 
+.footer-icons svg:hover,
 .icon:hover {
   color: #00ffa3;
 }
-
-
-.footer-bottom {
-  color: var(--main-white);
-}
-
 
 .footer-right-div {
   display: flex;
   flex-direction: row;
 }
 
+/* Media Queries */
 
-/* Default layout for small screens (mobile-first) */
-.intro {
-  flex: 1 1 100%;
-  margin-bottom: 2rem;
-}
-
-.footer-column.intro h3 {
-  color: var(--logo-color);
-}
-
-.footer-column.intro p {
-  color: var(--main-white);
-}
-
-
-
-
-
-
-
-/* For laptop and larger: give intro fixed width and let others wrap */
+/* For screens >= 1024px */
 @media (min-width: 1024px) {
   .intro {
     flex: 0 0 30vw;
@@ -151,8 +140,8 @@
   }
 }
 
-
-@media(max-width:768px) {
+/* For screens <= 768px */
+@media (max-width: 768px) {
   .footer-right-div {
     display: flex;
     flex-direction: column;
@@ -160,7 +149,7 @@
   }
 
   .footer-column h4 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
 
   .footer-column ul li {
@@ -175,13 +164,15 @@
     font-size: 1.2rem;
   }
 
-  .footer-bottom{
+  .footer-bottom {
     gap: 2rem;
-  }
-  .footer-icons{
-    width: 100%;
-    display: flex;
+    flex-direction: column;
     align-items: center;
+    text-align: center;
+  }
+
+  .footer-icons {
+    width: 100%;
     justify-content: center;
   }
 }

@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { ToggleUiThemeContext } from '../../ContextAPI/ToggleUITheme';
 import { Sun, Moon, TreePine, Cpu, PaintBucket, Flower } from 'lucide-react';
 import './ToggleThemes.css'
+import trackEvents from '../../Utils/mixPanelTrackEvents';
+import { useLocation } from 'react-router-dom';
 
 const themeIconMap = {
   default: { icon: PaintBucket, color: '#60b54b' },
@@ -14,8 +16,12 @@ const themeIconMap = {
 
 export default function ThemeToggleButton() {
   const { activeTheme, setActiveTheme, themes } = useContext(ToggleUiThemeContext);
-
+  const location = useLocation();
   const toggleTheme = () => {
+    trackEvents('Theme toggled' , {
+      source:'header',
+      path:location.pathname
+    })
     const currentIndex = themes.indexOf(activeTheme);
     const nextTheme = themes[(currentIndex + 1) % themes.length];
 

@@ -10,34 +10,36 @@ import logoutUser from '../../components/Supabase/supabaseLogout';
 import { GifContext } from '../../ContextAPI/GifContext';
 import ToggleThemes from '../../components/ToggleThemes/ToggleThemes';
 import { X } from 'lucide-react';
-import getStarted from '../../Utils/getStarted';
 import { LoginModalContext } from '../../ContextAPI/LoginModalContext';
-
+import trackEvents from '../../Utils/mixPanelTrackEvents.js'
 
 export const Header2 = () => {
   const [showDropDown, setShowDropDown] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { showModal, setShowModal, userName } = useContext(userNameContext);
+  const {userName } = useContext(userNameContext);
   const { isUserLogged, AuthUserData } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [activeLink, setActiveLink] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
-  const { isnav, setNav } = useContext(NavContext);
+  const {setNav } = useContext(NavContext);
   const location = useLocation();
   const { showGif, setShowGif } = useContext(GifContext);
   const gifTimeoutRef = useRef(null);
   const dropdownRef = useRef(null);
   const currentPath = location.pathname.replace("/", "");
   const isInsideEditor = location.pathname.startsWith('/editor/');
-  const { showLoginModal, setShowLoginModal } = useContext(LoginModalContext);
 
   const navItems = [
-    { id: "home", label: "Home", route: '' },
-    { id: "features", label: "Features", route: 'features' },
-    { id: "contact", label: "Contact Us", route: 'contact' },
+    { id: "home", label: "Home", route: '' , eventName:'Home clicked from header'},
+    { id: "features", label: "Features", route: 'features' , eventName:'features clicked from header' },
+    // { id: "contact", label: "Contact Us", route: 'contact' },
+    { id: 'working', label: "How it Works", route: 'working' , eventName:'How it works clicked from header'}
   ];
 
   const handleGoToHome = () => {
+    trackEvents('Logo Clicked',{
+      source: 'header',
+      location: location.pathname,
+    })
     navigate('/');
     setNav(true);
     setShowGif(true);
@@ -120,6 +122,10 @@ export const Header2 = () => {
                   key={item.id}
                   className={currentPath === item.id ? "active" : "defaultLogo"}
                   onClick={() => {
+                    trackEvents(`${item.eventName}`,{
+                      source:'header',
+                      location:location.pathname
+                    })
                     navigate(`/${item.route}`);
                     setIsMobileMenuOpen(false);
                   }}
@@ -131,6 +137,11 @@ export const Header2 = () => {
                 <li
                   className={currentPath === "sessions" ? "active" : "defaultLogo"}
                   onClick={() => {
+                    trackEvents('Recordings clicked' , {
+                      source:'Header',
+                      isUserLogged: isUserLogged,
+                      location:location.pathname
+                    })
                     navigate('/sessions');
                     setIsMobileMenuOpen(false);
                   }}
@@ -141,7 +152,8 @@ export const Header2 = () => {
               {isMobileMenuOpen && <li>Start Collaborating</li>}
               {isMobileMenuOpen && !isUserLogged && <li
                 onClick={
-                  () => { 
+                  () => {
+
                     setIsMobileMenuOpen(false);
                     navigate('/signUp');
                   }}
