@@ -1,7 +1,12 @@
 .no-record-by-rrweb {
     position: fixed;
-    padding: 1.96vw;
+    /* padding: 1.96vw; */
     z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 12vh;
     right: 0;
     top: 0;
+    width: 8vw;
 }

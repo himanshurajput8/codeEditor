@@ -20,6 +20,7 @@ body {
   flex: 1;
   min-width: 300px;
   max-width: 500px;
+  color: var(--main-white);
 }
 
 .custom-hero-left h2 {

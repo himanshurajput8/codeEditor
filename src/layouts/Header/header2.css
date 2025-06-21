@@ -83,6 +83,7 @@ body {
   justify-content: end;
   gap: 5px;
   color: var(--logo-color);
+  
 }
 
 .guest-signin img {

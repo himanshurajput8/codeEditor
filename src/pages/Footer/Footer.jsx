@@ -20,7 +20,11 @@ const Footer = () => {
           >
             <div>
               <button className="footer-btn">Start a Session →</button>
-              <button className="footer-btn dark">Stars on GitHub →</button>
+              <button className="footer-btn dark">
+                 <a href="https://github.com/Wannacryy24/code-together-web" target='__blank'>
+                Stars on GitHub →
+                </a>
+                </button>
             </div>
             <div
               style={{

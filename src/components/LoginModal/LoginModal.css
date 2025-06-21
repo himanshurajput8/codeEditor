@@ -33,12 +33,14 @@ body.modal-open {
   font-size: 2rem;
   font-weight: 600;
   margin: 0;
+  color: var(--logo-color);
 }
 
 .modal-subtitle {
   font-size: 1rem;
   color: #a0a0a0;
   margin-bottom: 1.5rem;
+  color: var(--main-white);
 }
 
 .modal-buttons {
@@ -64,13 +66,14 @@ body.modal-open {
 }
 
 .modal-btn.outline {
-  border: 1px solid #3d4d3d;
+  border: 1px solid var(--main-white);
   background-color: transparent;
-  color: #d4f7c5;
+  color: var(--logo-color);
 }
 
 .modal-btn.outline:hover {
-  background-color: #1a1a1a;
+  background-color: var(--main-white);
+  transition: ease-in-out 0.5s;
 }
 
 .modal-btn img {
@@ -81,7 +84,7 @@ body.modal-open {
 .modal-text-link {
   background: none;
   border: none;
-  color: #d4f7c5;
+  color: var(--logo-color);
   font-weight: 500;
   font-size: 0.95rem;
   cursor: pointer;
@@ -107,7 +110,7 @@ body.modal-open {
 }
 
 .modal-footer a {
-  color: #d4f7c5;
+  color: var(--logo-color);
   text-decoration: underline;
 }
 
@@ -125,6 +128,35 @@ body.modal-open {
   object-fit: contain;
   animation: floatUpDown 4s ease-in-out infinite;
 }
+
+.close-modal-div{
+  position: absolute;
+  right: 10vw;
+}
+
+.close-modal-btn{
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.close-modal-btn:hover{
+  cursor: pointer;
+  transform: rotate(90deg);
+}
+
+.close-modal-btn svg{
+  color: var(--logo-color);
+  height: 2rem;
+  width: 2rem;
+}
+
+.modal-footer
 
 @keyframes floatUpDown {
   0% { transform: translateY(0); }
@@ -155,6 +187,7 @@ body.modal-open {
     text-align: center;
     line-height: 1.3;
     box-sizing: border-box;
+    
   }
 
   .modal-logo {

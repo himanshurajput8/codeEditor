@@ -1,7 +1,8 @@
 import mixpanel from "mixpanel-browser";
 
 mixpanel.init('c353a0c68083cc5b406476215cda254a', {
-  debug: true, // helpful during dev
+  debug: true, // helpful during dev like console.log()
+  
 });
 
 export default mixpanel;

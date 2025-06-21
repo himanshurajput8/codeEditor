@@ -4,6 +4,7 @@ import LoginModal from "../LoginModal/LoginModal";
 import { LoginModalContext } from "../../ContextAPI/LoginModalContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import trackEvents from "../../Utils/mixPanelTrackEvents";
+import { FaRegArrowAltCircleRight } from "react-icons/fa";
 
 export default function SignInAsGuestBtn() {
   const { showLoginModal, setShowLoginModal } = useContext(LoginModalContext);
@@ -53,7 +54,7 @@ export default function SignInAsGuestBtn() {
   // 👤 Default: show guest login button
   return (
     <button className="guest-signin" onClick={handleAuthPage}>
-      <img src="/signinHeader.png" alt="" />
+      <FaRegArrowAltCircleRight/>
       Sign In as Guest
     </button>
   );
