@@ -63,9 +63,6 @@ export const EditorComp = () => {
         ValidateRoomFromSupabase();
     }, [roomId])
 
-
-
-
     useEffect(() => {
         if (editorRef.current) editorRef.current.layout();
     }, [isFullScreen, isSettingOpen]);

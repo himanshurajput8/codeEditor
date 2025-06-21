@@ -5,6 +5,8 @@ import { AuthContext } from '../../../ContextAPI/AuthUser';
 import {v4 as uuidv4} from 'uuid';
 import { supabase } from '../../Supabase/SupabaseClient';
 import './RecordingNav.css'
+import { FaRegStopCircle } from "react-icons/fa";
+import { SlCamrecorder } from "react-icons/sl";
 
 export default function RecordingNavIconsHeader() {
   const { recording, setRecording, stopFnRef} = useContext(RrwebContext);
@@ -65,13 +67,26 @@ export default function RecordingNavIconsHeader() {
     <div className='no-record-by-rrweb'>
       {!recording ? (
         <>
-        <button onClick={handleRecord} style={{ backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }}>
-          <img src="/image.png" alt="Start Recording" style={{ height: '40px' }} />
+        <button onClick={handleRecord} style={{ backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }} title="Start Recording">
+          {/* <img src="/image.png" alt="Start Recording" style={{ height: '40px' }} /> */}
+          <SlCamrecorder style={{
+            color:'var(--logo-color)',
+            fill:'var(--main-white)',
+            height:'2rem',
+            width:'2rem'
+          }}/>
         </button>
         </>
       ) : (
         <button onClick={handleStop} style={{ backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }}>
-          <img src="/stop.png" alt="Stop Recording" style={{ height: '40px' }} />
+          <FaRegStopCircle
+            style={{
+            color:'var(--main-white)',
+            height:'2rem',
+            width:'2rem'
+          }}
+          />
+          {/* <img src="/stop.png" alt="Stop Recording" style={{ height: '40px' }} /> */}
         </button>
       )}
       {/* {hasRecording && (

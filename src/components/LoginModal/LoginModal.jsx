@@ -2,17 +2,17 @@ import React, { useContext, useEffect } from 'react';
 import './LoginModal.css';
 import { supabase } from '../Supabase/SupabaseClient';
 import { AuthContext } from '../../ContextAPI/AuthUser';
-import { log } from 'socket.io-client/dist/socket.io.js';
 import { LoginModalContext } from '../../ContextAPI/LoginModalContext';
-import { XMarkIcon } from '@heroicons/react/24/outline';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import trackEvents from '../../Utils/mixPanelTrackEvents';
+import { IoMdCloseCircle } from "react-icons/io";
 
 export default function LoginModal() {
     const redirectTo = window.location.origin + '/auth/callback';
     const { setShowLoginModal } = useContext(LoginModalContext);
     const { setAuthUserData } = useContext(AuthContext);
     const location = useLocation();
-
+    const navigate = useNavigate();
     // useEffect(() => {
     //     if(location?.state?.from?.pathname){
     //         const redirectedPath = location?.state?.from?.pathname || '/';
@@ -21,7 +21,18 @@ export default function LoginModal() {
     // }, []);
 
 
+    useEffect(() => {
+        trackEvents("Login Modal Triggered", {
+            source: location?.state?.from?.pathname || "unknown",
+            redirected: !!location?.state?.from,
+        });
+    }, []);
+
+
     const handleGoogleAuthentication = async () => {
+        trackEvents("Login Attempt - Google", {
+            provider: "google",
+        });
         try {
             const { data, error } = await supabase.auth.signInWithOAuth({
                 provider: 'google',
@@ -29,7 +40,7 @@ export default function LoginModal() {
                     redirectTo,
                 },
             });
-            console.log("Google Auth Response:", data);
+            // console.log("Google Auth Response:", data);
             if (error) throw error;
         } catch (err) {
             console.error("Google Auth Error:", err.message);
@@ -38,7 +49,9 @@ export default function LoginModal() {
 
 
     const handleGithubAuthentication = async () => {
-        console.log('In Github');
+        trackEvents("Login Attempt - Github", {
+            provider: "Github",
+        });
         try {
             const { data, error } = await supabase.auth.signInWithOAuth({
                 provider: 'github',
@@ -71,11 +84,6 @@ export default function LoginModal() {
         fetchUser();
     }, [setAuthUserData]);
 
-    const handleLoginModalToFalse = () => {
-        // setShowisAuthPage(false);
-        setShowLoginModal(false);
-    }
-
     return (
         <>
             <div className="modal-wrapper">
@@ -106,7 +114,13 @@ export default function LoginModal() {
                         </button>
                     </div>
 
-                    <button className="modal-text-link">
+                    <button className="modal-text-link"
+                        onClick={() => {
+                            trackEvents("Try Playground Clicked", {
+                                from: "Login Modal",
+                            });
+                        }}
+                    >
                         Try the playground first <span>→</span>
                     </button>
 
@@ -123,11 +137,21 @@ export default function LoginModal() {
                 <div className="modal-right">
                     <img src="/LoginModalRightImg.webp" alt="Code Graphic" />
                 </div>
-                {/* <button className="cancel-btn close-modal"
-                    onClick={handleLoginModalToFalse}
-                >
-                 Close   
-                </button> */}
+
+                <div className='close-modal-div'>
+                <button
+                    className='close-modal-btn'
+                    onClick={()=>{
+                        navigate(location?.state?.from?.pathname || "/");
+                        trackEvents("Login Modal Closed Without Logging", {
+                            from: "Login Modal",
+                            source: location?.state?.from?.pathname || "unknown",
+                        });
+                    }}
+                    >
+                    <IoMdCloseCircle/>
+                </button>
+                    </div>
             </div>
         </>
     );

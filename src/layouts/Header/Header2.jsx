@@ -198,7 +198,6 @@ export const Header2 = () => {
                 <div className="dropdown">
                   <p onClick={()=>{
                     logoutUser();
-                    
                   }}>Logout</p>
                   <ToggleThemes />
                 </div>

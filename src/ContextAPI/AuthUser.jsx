@@ -14,7 +14,7 @@ export const AuthContextProvider = ({ children }) => {
     // Initial session load
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
-        console.log("Initial session user:", session.user);
+        // console.log("Initial session user:", session.user);
         setAuthUserData(session.user);
         setIsUserLogged(true);
         setShowisAuthPage(false);
@@ -25,7 +25,7 @@ export const AuthContextProvider = ({ children }) => {
     // Auth state changes
     const { data: subscription } = supabase.auth.onAuthStateChange(
       async (event, session) => {
-        console.log("Auth event:", event, session);
+        // console.log("Auth event:", event, session);
         if (event === "SIGNED_IN" || event === "INITIAL_SESSION") {
           if (session?.user) {
             setAuthUserData(session.user);

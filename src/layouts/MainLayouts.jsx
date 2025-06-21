@@ -10,16 +10,15 @@ import FeatureSectionWithVideo from "../NEWTHEME/FeatureSectionWithVideo/Feature
 import LoginModal from "../components/LoginModal/LoginModal";
 import Footer from "../pages/Footer/Footer";
 import HowItWorks from "../pages/HowItWorks/HowItWorks";
-import ValidateRoom from "../components/ValidateRoom/ValidateRoom";
 import mixpanel from "../mixpanel";
 import { useEffect } from "react";
 
 export const MainLayout = () => {
   const location = useLocation();
   const hideFooter =
-  location.pathname.startsWith("/editor/") ||
-  location.pathname.startsWith("/signUp") ||
-  location.pathname.startsWith("/session"); 
+                      location.pathname.startsWith("/editor/") ||
+                      location.pathname.startsWith("/signUp") ||
+                      location.pathname.startsWith("/session"); 
   
   useEffect(()=>{
     mixpanel.track("Page View", {
@@ -37,11 +36,11 @@ export const MainLayout = () => {
         <Route path="/home" element={<LandingPage />} />
         <Route path="/signUp" element={<LoginModal />} />
         <Route path="/working" element={<HowItWorks />} />
+        
         <Route
           path="/editor/:id"
           element={
             <ProtectedRoutes>
-              {/* <ValidateRoom/> */}
               <EditorComp />
             </ProtectedRoutes>
           }
